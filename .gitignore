@@ -1,0 +1,10 @@
+.idea/
+# Compiled Java files
+*.class
+
+# Build directories
+/target/
+/out/
+src/main/resources/credentials.json
+tokens/
+src/main/resources/application.properties

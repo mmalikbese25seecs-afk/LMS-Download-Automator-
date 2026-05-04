@@ -1,0 +1,200 @@
+<!-- LMS Deadline Calendar Page -->
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark"> <!-- Bootstrap reads this for dark/light colour system -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUST LMS — Deadline Calendar</title>
+
+    <!-- Google Fonts: Crimson Pro for headings, DM Sans for body/UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Crimson Pro for headings, DM Sans for body/UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5.3.8 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link to style.css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<!-- .cal-body sets page background and base font via style.css -->
+<body class="cal-body">
+
+<!-- Navbar -->
+<header class="cal-navbar">
+    <!-- Left side: logo + brand name + page subtitle -->
+    <div class="d-flex align-items-center gap-3">
+        <!-- Logo image pulled from the live NUST LMS portal CDN. -->
+        <img src="https://lms.nust.edu.pk/portal/pluginfile.php/1/theme_moove/logo/1771565541/LMS%20Logo%20Final%20Shade.png"
+             alt="NUST LMS Logo" style="height:36px;width:auto;object-fit:contain;flex-shrink:0;">
+        <div>
+            <div class="cal-navbar-title">NUST-LMS</div>
+            <div class="cal-navbar-sub">Deadline Calendar</div>
+        </div>
+    </div>
+    <!-- Right side: theme toggle switch + logout button -->
+    <div class="d-flex align-items-center gap-2">
+        <!-- Dark mode toggle switch -->
+        <div class="form-check form-switch mb-0 d-flex align-items-center gap-2">
+            <input class="form-check-input cal-theme-switch" type="checkbox" role="switch" id="darkToggle">
+            <label class="form-check-label cal-switch-label" for="darkToggle">
+                <i class="fa fa-sun" id="themeIcon"></i>
+            </label>
+        </div>
+        <button class="btn btn-sm cal-btn-logout" id="logoutBtn">
+            <i class="fa fa-right-from-bracket me-1"></i>Logout
+        </button>
+    </div>
+</header>
+
+<!-- Page Body -->
+<div class="container cal-page py-4">
+
+    <!-- Header -->
+    <div class="cal-page-header mb-4">
+        <h1 class="cal-heading mb-1">Your <span>Deadlines</span></h1>
+    </div>
+
+    <!-- Mini Monthly Calendar
+         Navigable month view; days that have deadlines get
+         a colored dot beneath them. Clicking a day scrolls
+         to or highlights the matching event cards below. -->
+    <div class="mini-cal-card mb-4">
+
+        <!-- Month navigation header -->
+        <div class="mini-cal-header">
+            <button class="mini-cal-nav" id="miniCalPrev">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <span class="mini-cal-month-label" id="miniCalLabel"></span>
+            <button class="mini-cal-nav" id="miniCalNext">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Day-of-week header row -->
+        <div class="mini-cal-grid mini-cal-dow-row">
+            <div>Mon</div><div>Tue</div><div>Wed</div>
+            <div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+        </div>
+
+        <!-- Day cells injected here by renderMiniCal() -->
+        <div class="mini-cal-grid mini-cal-days" id="miniCalDays"></div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card h-100">
+                <div class="cal-stat-num" id="statTotal">—</div>
+                <div class="cal-stat-lbl">Total</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card h-100">
+                <div class="cal-stat-num urgent" id="statUrgent">—</div>
+                <div class="cal-stat-lbl">Due in 3 days</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card h-100">
+                <div class="cal-stat-num assign" id="statAssign">—</div>
+                <div class="cal-stat-lbl">Assignments</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card h-100">
+                <div class="cal-stat-num quiz" id="statQuiz">—</div>
+                <div class="cal-stat-lbl">Quizzes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="d-flex flex-wrap gap-3 mb-3">
+        <div class="cal-legend-item"><div class="cal-dot" style="background:#e74c3c"></div>Due &lt; 3 days</div>
+        <div class="cal-legend-item"><div class="cal-dot" style="background:#e67e22"></div>Due &lt; 7 days</div>
+        <div class="cal-legend-item"><div class="cal-dot" style="background:#3b82f6"></div>Assignment</div>
+        <div class="cal-legend-item"><div class="cal-dot" style="background:#a78bfa"></div>Quiz</div>
+        <div class="cal-legend-item"><div class="cal-dot" style="background:#2dd4bf"></div>Lab Report</div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="cal-filter-btn active" data-type="all">All</button>
+        <button class="cal-filter-btn" data-type="assign">Assignments</button>
+        <button class="cal-filter-btn" data-type="quiz">Quizzes</button>
+        <button class="cal-filter-btn" data-type="lab">Lab Reports</button>
+    </div>
+
+    <!-- Loading State -->
+    <div id="calLoading" class="cal-loading text-center py-5">
+        <div class="cal-spinner mx-auto mb-3"></div>
+        <p class="text-secondary">Loading your deadlines...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="calError" class="cal-error text-center py-5" style="display:none">
+        <i class="fa fa-triangle-exclamation fs-2 mb-3 d-block"></i>
+        <p id="calErrorMsg" class="text-secondary mb-3">Something went wrong.</p>
+        <button class="cal-retry-btn" id="retryBtn">Try again</button>
+    </div>
+
+    <!-- Event List -->
+    <div class="cal-event-list d-flex flex-column gap-3" id="eventList" style="display:none!important"></div>
+
+</div>
+
+<!-- Detail Modal (Bootstrap 5 Modal) -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content cal-modal-content">
+            <div class="modal-body p-4">
+                <div class="d-flex align-items-start gap-3 mb-3">
+                    <div class="cal-modal-icon" id="modalIcon"></div>
+                    <div>
+                        <div class="cal-modal-title" id="modalTitle"></div>
+                        <div class="cal-modal-course" id="modalCourse"></div>
+                    </div>
+                </div>
+                <hr class="cal-modal-divider">
+                <div class="cal-modal-remaining text-center mb-3" id="modalRemainingBlock">
+                    <div class="cal-modal-remaining-label">Time remaining</div>
+                    <div class="cal-modal-remaining-value" id="modalRemaining"></div>
+                </div>
+                <div class="row g-2 mb-4">
+                    <div class="col-6">
+                        <div class="cal-modal-field">
+                            <div class="cal-modal-field-label">Due Date</div>
+                            <div class="cal-modal-field-value" id="modalDate"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="cal-modal-field">
+                            <div class="cal-modal-field-label">Due Time</div>
+                            <div class="cal-modal-field-value" id="modalTime"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="cal-modal-field">
+                            <div class="cal-modal-field-label">Type</div>
+                            <div class="cal-modal-field-value" id="modalType"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="cal-modal-field">
+                            <div class="cal-modal-field-label">Status</div>
+                            <div class="cal-modal-field-value" id="modalStatus"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn w-100 cal-modal-close-btn" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5.3.8 JS bundle — includes Popper.js (required for modal functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Calendar logic: API fetch, rendering, modal control, theme toggle, mini calendar -->
+<script src="js/calendar.js"></script>
+</body>
+</html>

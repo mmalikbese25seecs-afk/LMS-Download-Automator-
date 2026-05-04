@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Course — NUST LMS</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <!-- Bootstrap 5.3.8 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- style.css -->
+    <link rel="stylesheet" href="css/style.css"/>
+    <!-- course.css -->
+    <link rel="stylesheet" href="css/course.css"/>
+</head>
+<body class="cal-body">
+
+<!-- NAVBAR -->
+<header class="cal-navbar">
+    <div class="d-flex align-items-center gap-3">
+        <a href="login.html" class="cal-back-btn" title="Back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div>
+            <div class="cal-navbar-title">NUST Learning Management System</div>
+            <div class="cal-navbar-sub">lms.nust.edu.pk</div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+        <label class="d-flex align-items-center gap-2 mb-0">
+            <span class="cal-switch-label"><i class="fa-solid fa-moon" id="themeIcon"></i></span>
+            <input type="checkbox" class="form-check-input cal-theme-switch mb-0" id="themeToggle"/>
+        </label>
+        <button class="btn cal-btn-logout btn-sm">
+            <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
+        </button>
+    </div>
+</header>
+
+<!--  MAIN  -->
+<main class="container cal-page mx-auto px-3 px-md-4 py-4">
+
+    <!-- Breadcrumb -->
+    <nav class="course-breadcrumb mb-3" aria-label="breadcrumb">
+        <span class="crumb"><i class="fa-solid fa-house-chimney"></i> Home</span>
+        <span class="crumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+        <span class="crumb active" id="breadcrumbCourse">Loading…</span>
+    </nav>
+
+    <!-- Course Hero -->
+    <div class="course-hero mb-4">
+        <div class="course-hero-inner">
+            <div class="course-hero-left">
+                <div class="course-code-badge" id="heroCourseCode">—</div>
+                <h1 class="course-hero-title" id="heroCourseTitle">Loading course…</h1>
+                <p class="course-hero-desc" id="heroCourseDesc"></p>
+
+            </div>
+            <div class="course-hero-right">
+                <div class="course-progress-ring-wrap">
+                    <svg class="course-progress-ring" viewBox="0 0 80 80">
+                        <circle class="ring-bg" cx="40" cy="40" r="34"/>
+                        <circle class="ring-fill" cx="40" cy="40" r="34" id="progressRing"/>
+                    </svg>
+                    <div class="ring-label">
+                        <span class="ring-pct" id="progressPct">0%</span>
+                        <span class="ring-sub">Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stat Row -->
+    <div class="row g-3 mb-4" id="statsRow">
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card text-center">
+                <div class="cal-stat-num assign" id="statWeeks">—</div>
+                <div class="cal-stat-lbl">Weeks</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card text-center">
+                <div class="cal-stat-num" id="statResources">—</div>
+                <div class="cal-stat-lbl">Resources</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card text-center">
+                <div class="cal-stat-num quiz" id="statAssignments">—</div>
+                <div class="cal-stat-lbl">Assignments</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="cal-stat-card text-center">
+                <div class="cal-stat-num urgent" id="statDue">—</div>
+                <div class="cal-stat-lbl">Due Soon</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <div class="course-toolbar mb-4 d-flex flex-wrap gap-2 align-items-center">
+        <div class="course-search-wrap flex-grow-1">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" class="course-search" placeholder="Search resources, assignments…"/>
+        </div>
+        <div class="d-flex gap-2 flex-wrap" id="filterBtns">
+            <button class="cal-filter-btn active" data-filter="all">All</button>
+            <button class="cal-filter-btn" data-filter="lecture">Lectures</button>
+            <button class="cal-filter-btn" data-filter="assignment">Assignments</button>
+            <button class="cal-filter-btn" data-filter="pdf">PDFs</button>
+            <button class="cal-filter-btn" data-filter="quiz">Quizzes</button>
+        </div>
+    </div>
+
+    <!-- Weeks / Sections -->
+    <div id="weekSections">
+        <!-- Injected by JS -->
+    </div>
+
+</main>
+
+<!-- RESOURCE MODAL -->
+<div class="modal fade" id="resourceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content cal-modal-content border-0">
+            <div class="modal-body p-4">
+
+                <div class="d-flex align-items-flex-start gap-3 mb-3">
+                    <div class="cal-modal-icon" id="modalIcon"></div>
+                    <div>
+                        <div class="cal-modal-title" id="modalTitle"></div>
+                        <div class="cal-modal-course" id="modalWeek"></div>
+                    </div>
+                </div>
+
+                <hr class="cal-modal-divider"/>
+
+                <div class="d-flex flex-column gap-2 mb-4">
+                    <div class="cal-modal-field d-flex justify-content-between align-items-center">
+                        <span class="cal-modal-field-label">Type</span>
+                        <span class="cal-modal-field-value" id="modalType"></span>
+                    </div>
+                    <div class="cal-modal-field d-flex justify-content-between align-items-center">
+                        <span class="cal-modal-field-label">Size / Duration</span>
+                        <span class="cal-modal-field-value" id="modalSize"></span>
+                    </div>
+                    <div class="cal-modal-field d-flex justify-content-between align-items-center" id="modalDueDateRow">
+                        <span class="cal-modal-field-label">Due Date</span>
+                        <span class="cal-modal-field-value" id="modalDueDate"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button class="btn cal-modal-close-btn flex-grow-1" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark me-1"></i> Close
+                    </button>
+                    <a href="#" id="modalOpenBtn" class="btn course-open-btn flex-grow-1" target="_blank">
+                        <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Open
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/course.js"></script>
+</body>
+</html>

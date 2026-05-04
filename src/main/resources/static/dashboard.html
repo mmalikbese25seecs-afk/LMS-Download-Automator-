@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+    <title>
+        NUST LMS — Dashboard
+    </title>
+=======
+    <title>NUST LMS — Dashboard</title>
+>>>>>>> 1906425 (jk)
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+<<<<<<< HEAD
+        :root{
+            --bg:#0b0d15;--surface:#10121d;--card:#161929;--border:#222640;--accent:#4f8ef7;--glow:rgba(79,142,247,0.18);--red:#e74c3c;--orange:#e67e22;--green:#2dd4bf;--purple:#a78bfa;--yellow:#f59e0b;--muted:#5a6080;--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace
+        }
+        *{
+            box-sizing:border-box
+        }
+        body{
+            font-family:var(--font);background:var(--bg);color:#dde1f0;min-height:100vh
+        }
+        .topnav{
+            background:var(--surface);border-bottom:1px solid var(--border);height:58px;position:sticky;top:0;z-index:1030
+        }
+        .nav-brand{
+            font-size:1.05rem;font-weight:800;color:#dde1f0;text-decoration:none
+        }
+        .nav-brand span{color:var(--accent)
+        }
+        .nav-pill{
+            padding:5px 14px;border-radius:8px;font-size:.84rem;color:var(--muted);text-decoration:none;border:1px solid transparent;transition:all .15s;font-weight:500
+        }
+        .nav-pill:hover{
+            background:var(--card);color:#dde1f0;border-color:var(--border)
+        }
+        .nav-pill.active{
+            background:var(--accent);color:#fff;border-color:var(--accent)
+        }
+        .user-avatar{
+            width:32px;height:32px;border-radius:50%;background:var(--accent);font-size:.82rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0
+        }
+        .btn-logout{
+            background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.8rem;padding:4px 12px;border-radius:7px;transition:all .15s;cursor:pointer;font-family:var(--font)
+        }
+        .btn-logout:hover{
+            border-color:var(--red);color:var(--red)
+        }
+        .page-wrap{
+            max-width:1280px;margin:0 auto;padding:28px 20px
+        }
+        .stat-card{
+            background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:transform .15s,box-shadow .15s
+        }
+        .stat-card:hover{
+            transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)
+        }
+        .stat-label{
+            font-size:.72rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px
+        }
+        .stat-value{
+            font-size:2.2rem;font-weight:800;line-height:1;font-family:var(--mono)
+        }
+        .stat-sub{
+            font-size:.76rem;color:var(--muted);margin-top:5px
+        }
+        .val-blue{
+            color:var(--accent)
+        }
+        .val-red{
+            color:var(--red)
+        }
+        .val-green{
+            color:var(--green)
+        }
+        .val-purple{
+            color:var(--purple)
+        }
+        .section-card{
+            background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden
+        }
+        .section-head{
+            padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between
+        }
+        .section-head h2{
+            font-size:.92rem;font-weight:700;margin:0
+        }
+        .head-badge{
+            font-size:.72rem;background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:20px;font-weight:500
+        }
+        .course-row{
+            border-bottom:1px solid var(--border);transition:background .12s
+        }
+        .course-row:last-child{
+            border-bottom:none
+        }
+        .course-row.is-fav{border-left:3px solid var(--yellow)
+        }
+        .course-header{
+            padding:12px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none
+        }
+        .course-header:hover{
+            background:rgba(79,142,247,.05)
+        }
+        .course-chevron{
+            color:var(--muted);font-size:.75rem;transition:transform .2s;flex-shrink:0
+        }
+        .course-chevron.open{
+            transform:rotate(90deg)
+        }
+        .course-name{
+            font-size:.88rem;font-weight:600;color:#dde1f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+        }
+        .course-meta{
+            font-size:.72rem;color:var(--muted);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap
+        }
+        .course-meta i{
+            font-size:.75rem
+        }
+        .new-badge{
+            font-size:.68rem;font-weight:800;background:var(--red);color:#fff;border-radius:10px;padding:2px 7px;flex-shrink:0
+        }
+        .btn-star{
+            background:transparent;border:none;cursor:pointer;font-size:1rem;padding:0 2px;transition:transform .15s;flex-shrink:0
+        }
+        .btn-star:hover{
+            transform:scale(1.25)
+        }
+        .btn-star.starred{
+            color:var(--yellow)
+        }
+        .btn-star.unstarred{
+            color:var(--muted)
+        }
+        .course-actions{
+            display:flex;gap:6px;flex-wrap:wrap;align-items:center;flex-shrink:0;margin-left:auto
+        }
+        .course-panel{
+            display:none;border-top:1px solid var(--border);background:rgba(0,0,0,.15)
+        }.course-panel.open{
+             display:block
+         }
+        .week-tabs{
+            display:flex;overflow-x:auto;border-bottom:1px solid var(--border);padding:0 16px;scrollbar-width:thin
+        }
+        .week-tab{
+            padding:9px 13px;font-size:.77rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;flex-shrink:0;user-select:none
+        }
+        .week-tab:hover{
+            color:#dde1f0
+        }
+        .week-tab.active{
+            color:var(--accent);border-bottom-color:var(--accent)
+        }
+        .week-tab.has-files::after{
+            content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle
+        }
+        .panel-toolbar{
+            padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid var(--border);flex-wrap:wrap
+        }
+        .toolbar-left{
+            display:flex;gap:6px;flex-wrap:wrap;align-items:center
+        }
+        .type-chip{
+            padding:4px 11px;border-radius:20px;font-size:.74rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .15s;white-space:nowrap
+        }
+        .type-chip:hover{
+            border-color:var(--accent);color:var(--accent)
+        }
+        .type-chip.active{background:var(--accent);border-color:var(--accent);color:#fff
+        }
+        .file-list{
+            padding:8px 14px
+        }
+        .file-item{
+            display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:7px;transition:background .12s
+        }
+        .file-item:hover{
+            background:rgba(255,255,255,.04)
+        }
+        .file-checkbox{
+            width:15px;height:15px;cursor:pointer;accent-color:var(--accent);flex-shrink:0
+        }
+        .file-icon-sm{
+            width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0
+        }
+        .file-name{
+            font-size:.82rem;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+        }
+        .file-size{
+            font-size:.71rem;color:var(--muted);font-family:var(--mono);flex-shrink:0
+        }
+        .btn-sm-act{
+            display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;font-size:.77rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:#dde1f0;transition:all .15s;font-family:var(--font);white-space:nowrap
+        }
+        .btn-sm-act:hover{
+            border-color:var(--accent);color:var(--accent);background:var(--glow)
+        }
+        .btn-sm-act:disabled{
+            opacity:.45;cursor:not-allowed;pointer-events:none
+        }
+        .btn-sm-act.primary{
+            background:var(--accent);border-color:var(--accent);color:#fff
+        }
+        .btn-sm-act.primary:hover{
+            background:#3a7be0;color:#fff}
+        .btn-sm-act.success{
+            background:var(--green);border-color:var(--green);color:#0b0d15
+        }
+        .btn-sm-act.drive{
+            border-color:#4285F4;color:#8ab4f8
+        }
+        .btn-sm-act.drive:hover{
+            background:rgba(66,133,244,.12);color:#fff}
+        .quick-actions{
+            display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+        .action-btn{
+            display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:9px;border:1px solid var(--border);background:var(--card);color:#dde1f0;text-decoration:none;font-size:.84rem;font-weight:500;cursor:pointer;transition:all .15s;font-family:var(--font)}
+        .action-btn:hover{
+            border-color:var(--accent);color:var(--accent);background:var(--glow)
+        }
+        .drive-banner{
+            background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap
+        }
+        .drive-dot{
+            width:8px;height:8px;border-radius:50%;flex-shrink:0}.drive-dot.on{background:var(--green);box-shadow:0 0 6px var(--green)}.drive-dot.off{background:var(--muted)}.drive-dot.nc{background:var(--orange)
+                                                                                                                                                                              }
+        .changes-bar{
+            background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:10px;padding:11px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.84rem
+        }
+        .deadline-item{
+            padding:12px 18px;
+            border-bottom:1px solid var(--border);
+            display:flex;gap:10px;
+            align-items:flex-start
+        }.deadline-item:last-child{
+                     border-bottom:none
+                                                                                                                 }
+        .dl-dot{
+            width:9px;height:9px;border-radius:50%;margin-top:5px;flex-shrink:0
+        }
+        .dl-title{
+            font-size:.84rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+        }
+        .dl-course{
+            font-size:.72rem;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+        }
+        .dl-when{
+            font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;padding:3px 9px;border-radius:12px;color:#fff;font-family:var(--mono)
+        }
+        .urgent-banner{
+            background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.28);border-radius:10px;padding:12px 18px;color:#f87171;font-size:.86rem;display:flex;align-items:center;gap:10px
+        }
+        .modal-bg{
+            position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:none;align-items:center;justify-content:center;padding:16px
+        }
+        .modal-bg.open{
+            display:flex
+        }
+        .modal-box{
+            background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto
+        }
+        .modal-box h3{
+            font-size:1.05rem;font-weight:800;margin-bottom:18px
+        }
+        .radio-option{
+            display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:9px;border:1px solid var(--border);cursor:pointer;transition:all .15s;margin-bottom:8px
+        }
+        .radio-option:hover,.radio-option.selected{
+            border-color:var(--accent);background:var(--glow)
+        }
+        .radio-option input{
+            accent-color:var(--accent);width:16px;height:16px
+        }
+        .modal-label{
+            font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px
+        }
+        .modal-select{
+            width:100%;background:var(--surface);border:1px solid var(--border);color:#dde1f0;border-radius:8px;padding:8px 12px;font-size:.85rem;font-family:var(--font);outline:none
+        }
+        .modal-select:focus{
+            border-color:var(--accent)
+        }
+        .toggle-row{
+            display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)
+        }
+        .toggle-row:last-child{
+            border-bottom:none
+        }
+        .toggle{
+            position:relative;width:40px;height:22px;cursor:pointer
+        }
+        .toggle input{
+            opacity:0;width:0;height:0
+        }
+        .slider{
+            position:absolute;inset:0;background:var(--border);border-radius:20px;transition:.3s
+        }
+        .slider::before{
+            content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s
+        }
+        input:checked+.slider{
+            background:var(--accent)
+        }
+        input:checked+.slider::before{
+            transform:translateX(18px)
+        }
+        .center-screen{
+            display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:14px;color:var(--muted)
+        }
+        .spinner-ring{
+            width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite
+        }
+        .spinner-sm{
+            width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
+        @keyframes spin{
+            to{
+                transform:rotate(360deg)
+            }
+        }
+        .empty-msg{
+            padding:22px;text-align:center;color:var(--muted);font-size:.84rem
+        }
+        .loading-row{
+            padding:18px;text-align:center;color:var(--muted);font-size:.82rem
+        }
+        .toast-custom{
+            position:fixed;
+            bottom:24px;right:24px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:10px;
+            padding:13px 18px;font-size:.85rem;
+            color:#dde1f0;
+            max-width:340px;
+            z-index:9999;
+            opacity:0;
+            transform:translateY(10px);
+            transition:all .25s;pointer-events:none;
+            font-family:var(--font)
+        }.toast-custom.show{
+                     opacity:1;transform:translateY(0)
+                 }
+        .icon-pdf{
+            background:rgba(231,76,60,.15);color:#e74c3c
+        }
+        .icon-pptx{
+            background:rgba(230,126,34,.15);color:#e67e22
+        }
+        .icon-docx{
+            background:rgba(79,142,247,.15);color:#4f8ef7
+        }
+        .icon-zip{
+            background:rgba(167,139,250,.15);color:#a78bfa
+        }
+        .icon-mp4{
+            background:rgba(45,212,191,.15);color:#2dd4bf
+        }
+        .icon-xlsx{
+            background:rgba(45,212,191,.15);color:#2dd4bf
+        }
+        .icon-file{
+            background:rgba(90,96,128,.2);color:var(--muted)
+        }
+        @media(max-width:768px){
+            .topnav .nav-links{display:none
+            }.page-wrap{padding:16px 12px
+             }
+        }
+=======
+        :root{--bg:#0b0d15;--surface:#10121d;--card:#161929;--border:#222640;--accent:#4f8ef7;--glow:rgba(79,142,247,0.18);--red:#e74c3c;--orange:#e67e22;--green:#2dd4bf;--purple:#a78bfa;--yellow:#f59e0b;--muted:#5a6080;--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace}
+        *{box-sizing:border-box}
+        body{font-family:var(--font);background:var(--bg);color:#dde1f0;min-height:100vh}
+        .topnav{background:var(--surface);border-bottom:1px solid var(--border);height:58px;position:sticky;top:0;z-index:1030}
+        .nav-brand{font-size:1.05rem;font-weight:800;color:#dde1f0;text-decoration:none}
+        .nav-brand span{color:var(--accent)}
+        .nav-pill{padding:5px 14px;border-radius:8px;font-size:.84rem;color:var(--muted);text-decoration:none;border:1px solid transparent;transition:all .15s;font-weight:500}
+        .nav-pill:hover{background:var(--card);color:#dde1f0;border-color:var(--border)}
+        .nav-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+        .user-avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);font-size:.82rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .btn-logout{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.8rem;padding:4px 12px;border-radius:7px;transition:all .15s;cursor:pointer;font-family:var(--font)}
+        .btn-logout:hover{border-color:var(--red);color:var(--red)}
+        .page-wrap{max-width:1280px;margin:0 auto;padding:28px 20px}
+        .stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:transform .15s,box-shadow .15s}
+        .stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+        .stat-label{font-size:.72rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+        .stat-value{font-size:2.2rem;font-weight:800;line-height:1;font-family:var(--mono)}
+        .stat-sub{font-size:.76rem;color:var(--muted);margin-top:5px}
+        .val-blue{color:var(--accent)}.val-red{color:var(--red)}.val-green{color:var(--green)}.val-purple{color:var(--purple)}
+        .section-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+        .section-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+        .section-head h2{font-size:.92rem;font-weight:700;margin:0}
+        .head-badge{font-size:.72rem;background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:20px;font-weight:500}
+        .course-row{border-bottom:1px solid var(--border);transition:background .12s}
+        .course-row:last-child{border-bottom:none}
+        .course-row.is-fav{border-left:3px solid var(--yellow)}
+        .course-header{padding:12px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+        .course-header:hover{background:rgba(79,142,247,.05)}
+        .course-chevron{color:var(--muted);font-size:.75rem;transition:transform .2s;flex-shrink:0}
+        .course-chevron.open{transform:rotate(90deg)}
+        .course-name{font-size:.88rem;font-weight:600;color:#dde1f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .course-meta{font-size:.72rem;color:var(--muted);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
+        .new-badge{font-size:.68rem;font-weight:800;background:var(--red);color:#fff;border-radius:10px;padding:2px 7px;flex-shrink:0}
+        .btn-star{background:transparent;border:none;cursor:pointer;font-size:1rem;padding:0 2px;transition:transform .15s;flex-shrink:0}
+        .btn-star:hover{transform:scale(1.25)}
+        .btn-star.starred{color:var(--yellow)}.btn-star.unstarred{color:var(--muted)}
+        .course-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center;flex-shrink:0;margin-left:auto}
+        .course-panel{display:none;border-top:1px solid var(--border);background:rgba(0,0,0,.15)}
+        .course-panel.open{display:block}
+        .week-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border);padding:0 16px;scrollbar-width:thin}
+        .week-tab{padding:9px 13px;font-size:.77rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;flex-shrink:0;user-select:none}
+        .week-tab:hover{color:#dde1f0}
+        .week-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+        .week-tab.has-files::after{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle}
+        .panel-toolbar{padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+        .toolbar-left{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+        .type-chip{padding:4px 11px;border-radius:20px;font-size:.74rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .15s;white-space:nowrap}
+        .type-chip:hover{border-color:var(--accent);color:var(--accent)}
+        .type-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+        .file-list{padding:8px 14px}
+        .file-item{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:7px;transition:background .12s}
+        .file-item:hover{background:rgba(255,255,255,.04)}
+        .file-checkbox{width:15px;height:15px;cursor:pointer;accent-color:var(--accent);flex-shrink:0}
+        .file-icon-sm{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0}
+        .file-name{font-size:.82rem;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .file-size{font-size:.71rem;color:var(--muted);font-family:var(--mono);flex-shrink:0}
+        .btn-sm-act{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;font-size:.77rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:#dde1f0;transition:all .15s;font-family:var(--font);white-space:nowrap}
+        .btn-sm-act:hover{border-color:var(--accent);color:var(--accent);background:var(--glow)}
+        .btn-sm-act:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+        .btn-sm-act.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+        .btn-sm-act.primary:hover{background:#3a7be0;color:#fff}
+        .btn-sm-act.success{background:var(--green);border-color:var(--green);color:#0b0d15}
+        .btn-sm-act.drive{border-color:#4285F4;color:#8ab4f8}
+        .btn-sm-act.drive:hover{background:rgba(66,133,244,.12);color:#fff}
+        .quick-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+        .action-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:9px;border:1px solid var(--border);background:var(--card);color:#dde1f0;text-decoration:none;font-size:.84rem;font-weight:500;cursor:pointer;transition:all .15s;font-family:var(--font)}
+        .action-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--glow)}
+        .drive-banner{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+        .drive-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+        .drive-dot.on{background:var(--green);box-shadow:0 0 6px var(--green)}
+        .drive-dot.off{background:var(--muted)}
+        .drive-dot.nc{background:var(--orange)}
+        .changes-bar{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);border-radius:10px;padding:11px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.84rem}
+        .deadline-item{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start}
+        .deadline-item:last-child{border-bottom:none}
+        .dl-dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex-shrink:0}
+        .dl-title{font-size:.84rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .dl-course{font-size:.72rem;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .dl-when{font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;padding:3px 9px;border-radius:12px;color:#fff;font-family:var(--mono)}
+        .urgent-banner{background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.28);border-radius:10px;padding:12px 18px;color:#f87171;font-size:.86rem;display:flex;align-items:center;gap:10px}
+        .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:none;align-items:center;justify-content:center;padding:16px}
+        .modal-bg.open{display:flex}
+        .modal-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+        .modal-box h3{font-size:1.05rem;font-weight:800;margin-bottom:18px}
+        .radio-option{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:9px;border:1px solid var(--border);cursor:pointer;transition:all .15s;margin-bottom:8px}
+        .radio-option:hover,.radio-option.selected{border-color:var(--accent);background:var(--glow)}
+        .radio-option input{accent-color:var(--accent);width:16px;height:16px}
+        .modal-label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+        .modal-select{width:100%;background:var(--surface);border:1px solid var(--border);color:#dde1f0;border-radius:8px;padding:8px 12px;font-size:.85rem;font-family:var(--font);outline:none}
+        .modal-select:focus{border-color:var(--accent)}
+        .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+        .toggle-row:last-child{border-bottom:none}
+        .toggle{position:relative;width:40px;height:22px;cursor:pointer}
+        .toggle input{opacity:0;width:0;height:0}
+        .slider{position:absolute;inset:0;background:var(--border);border-radius:20px;transition:.3s}
+        .slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+        input:checked+.slider{background:var(--accent)}
+        input:checked+.slider::before{transform:translateX(18px)}
+        .center-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:14px;color:var(--muted)}
+        .spinner-ring{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+        .spinner-sm{width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .empty-msg{padding:22px;text-align:center;color:var(--muted);font-size:.84rem}
+        .loading-row{padding:18px;text-align:center;color:var(--muted);font-size:.82rem}
+        .toast-custom{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 18px;font-size:.85rem;color:#dde1f0;max-width:340px;z-index:9999;opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;font-family:var(--font)}
+        .toast-custom.show{opacity:1;transform:translateY(0)}
+        .icon-pdf{background:rgba(231,76,60,.15);color:#e74c3c}
+        .icon-pptx{background:rgba(230,126,34,.15);color:#e67e22}
+        .icon-docx{background:rgba(79,142,247,.15);color:#4f8ef7}
+        .icon-zip{background:rgba(167,139,250,.15);color:#a78bfa}
+        .icon-mp4{background:rgba(45,212,191,.15);color:#2dd4bf}
+        .icon-xlsx{background:rgba(45,212,191,.15);color:#2dd4bf}
+        .icon-file{background:rgba(90,96,128,.2);color:var(--muted)}
+        @media(max-width:768px){.topnav .nav-links{display:none}.page-wrap{padding:16px 12px}}
+>>>>>>> 1906425 (jk)
+    </style>
+</head>
+<body>
+<nav class="topnav d-flex align-items-center px-4 gap-3">
+    <a class="nav-brand me-3" href="/dashboard.html">NUST <span>LMS</span></a>
+    <div class="d-flex gap-1 nav-links">
+        <a href="/dashboard.html" class="nav-pill active">🏠 Dashboard</a>
+        <a href="/calendar.html" class="nav-pill">📅 Calendar</a>
+        <a href="/files.html" class="nav-pill">📂 Files</a>
+        <a href="/summarizer.html" class="nav-pill">🤖 Summarizer</a>
+    </div>
+    <div class="d-flex align-items-center gap-2 ms-auto">
+        <div class="user-avatar" id="avatarLetter">?</div>
+        <span class="d-none d-sm-inline" style="font-size:.83rem;color:var(--muted)" id="navUserName"></span>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<div class="page-wrap" id="pageContent">
+    <div class="center-screen"><div class="spinner-ring"></div><p style="font-size:.88rem">Loading...</p></div>
+</div>
+
+<!-- Save Destination Modal -->
+<div class="modal-bg" id="saveModal">
+    <div class="modal-box">
+        <h3>📥 Where do you want to save?</h3>
+        <p style="font-size:.83rem;color:var(--muted);margin-bottom:18px" id="saveModalLabel"></p>
+        <div class="radio-option selected" id="opt-device" onclick="selectSaveOpt('device')">
+            <input type="radio" name="saveDest" checked>
+            <div><strong>Download to Device</strong><div style="font-size:.77rem;color:var(--muted);margin-top:2px">Save to downloads/ folder on this machine</div></div>
+        </div>
+        <div class="radio-option" id="opt-drive" onclick="selectSaveOpt('drive')">
+            <input type="radio" name="saveDest">
+            <div><strong>Upload to Google Drive</strong><div style="font-size:.77rem;color:var(--muted);margin-top:2px">Download then sync to Drive LMS folder</div></div>
+        </div>
+        <div class="radio-option" id="opt-both" onclick="selectSaveOpt('both')">
+            <input type="radio" name="saveDest">
+            <div><strong>Both — Device &amp; Drive</strong><div style="font-size:.77rem;color:var(--muted);margin-top:2px">Keep local copy and back up to Drive</div></div>
+        </div>
+        <div class="d-flex gap-2 justify-content-end mt-4">
+            <button class="btn-sm-act" onclick="closeSaveModal()">Cancel</button>
+            <button class="btn-sm-act primary" onclick="confirmSave()"><i class="bi bi-download me-1"></i>Start Download</button>
+        </div>
+    </div>
+</div>
+
+<!-- Schedule Modal -->
+<div class="modal-bg" id="scheduleModal">
+    <div class="modal-box">
+        <h3>⏰ Auto-Sync Schedule</h3>
+        <div class="modal-label">Frequency</div>
+        <div class="radio-option selected" id="sched-manual" onclick="selectSched('manual')">
+            <input type="radio" name="schedMode" checked>
+            <div><strong>Manual Only</strong><div style="font-size:.77rem;color:var(--muted);margin-top:2px">Sync only when you click Sync Now</div></div>
+        </div>
+        <div class="radio-option" id="sched-daily" onclick="selectSched('daily')">
+            <input type="radio" name="schedMode">
+            <div><strong>Daily</strong><div style="font-size:.77rem;color:var(--muted);margin-top:2px">Runs every day at the selected hour</div></div>
+        </div>
+        <div class="radio-option" id="sched-weekly" onclick="selectSched('weekly')">
+            <input type="radio" name="schedMode">
+            <div><strong>Weekly (Every Sunday)</strong><div style="font-size:.77rem;color:var(--muted);margin-top:2px">Downloads week content every Sunday morning</div></div>
+        </div>
+        <div class="mt-3 mb-3" id="hourRow" style="display:none">
+            <div class="modal-label">Time of Day</div>
+            <select class="modal-select" id="schedHour">
+                <option value="0">12:00 AM</option><option value="1">1:00 AM</option>
+                <option value="2" selected>2:00 AM</option><option value="3">3:00 AM</option>
+                <option value="6">6:00 AM</option><option value="7">7:00 AM</option>
+                <option value="8">8:00 AM</option><option value="12">12:00 PM</option>
+                <option value="18">6:00 PM</option><option value="20">8:00 PM</option>
+                <option value="22">10:00 PM</option>
+            </select>
+        </div>
+        <div class="toggle-row">
+            <div><strong style="font-size:.85rem">Google Drive Auto-Sync</strong><div style="font-size:.75rem;color:var(--muted)">Upload to Drive after each sync</div></div>
+            <label class="toggle"><input type="checkbox" id="driveAutoToggle"><span class="slider"></span></label>
+        </div>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:12px" id="lastRunDisplay"></div>
+        <div class="d-flex gap-2 justify-content-end mt-4">
+            <button class="btn-sm-act" onclick="document.getElementById('scheduleModal').classList.remove('open')">Cancel</button>
+            <button class="btn-sm-act primary" onclick="saveSchedule()"><i class="bi bi-check-lg me-1"></i>Save</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast-custom" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+<<<<<<< HEAD
+    // State
+    let dashData={
+    },driveStatus={
+        configured:false,authorized:false
+    },saveTarget={
+    },saveOpt='device',schedMode='manual';
+    const CS={
+    };
+
+    // Boot
+    document.addEventListener('DOMContentLoaded',async()=>{
+        try{
+            const r=await fetch('/api/auth/status');if(!(await r.json()).loggedIn){window.location.href='/index.html';return;
+            }
+        }catch{
+            window.location.href='/index.html';return;
+        }
+        await Promise.all([initDrive(),initChanges()]);
+        const d=await fetchDash();if(d)renderPage(d);
+    });
+    async function fetchDash(){
+        try{
+            const r=await fetch('/api/dashboard/summary');if(r.status===401){
+                window.location.href='/index.html';return null;
+            }if(!r.ok){
+                showErr((await r.json()).error||'Failed');return null;
+            }dashData=await r.json();return dashData;
+        }catch(e){showErr(e.message);return null;
+        }
+    }
+    async function initDrive(){
+        try{
+            const r=await fetch('/api/drive/status');if(r.ok)driveStatus=await r.json();
+        }catch{
+
+        }
+    }
+    async function initChanges(){try{const r=await fetch('/api/changes/status');if(!r.ok)return;const s=await r.json();if(!s.hasSnapshot){await fetch('/api/changes/snapshot',{method:'POST'});}else{sessionStorage.setItem('lastChecked',s.lastChecked);}}catch{}}
+
+    // Render Page
+    function renderPage(data){
+        const localUser = JSON.parse(localStorage.getItem('lmsUser'));
+        const fullName = data.fullName || localUser?.fullName || "User";
+
+        document.getElementById('navUserName').textContent = fullName;
+        document.getElementById('avatarLetter').textContent=data.fullName.charAt(0).toUpperCase();
+        const fn=data.fullName.split(' ')[0],uc=data.urgentCount,ec=data.upcomingEvents.length,qc=data.upcomingEvents.filter(e=>e.eventType==='quiz').length;
+        const sorted=[...data.courses].sort((a,b)=>{
+            if(a.favorite&&!b.favorite)return -1;if(!a.favorite&&b.favorite)return 1;return a.fullName.localeCompare(b.fullName);
+        });
+        const lc=sessionStorage.getItem('lastChecked');
+        document.getElementById('pageContent').innerHTML=`
+    <div class="mb-3 d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div><h1 style="font-size:1.45rem;font-weight:800;margin:0">Good day, ${
+            safe(fn)
+        } 👋</h1><p style="font-size:.88rem;color:var(--muted);margin:4px 0 0">Your academic overview.</p></div>
+=======
+    // ── State ──────────────────────────────────────────────────────────────────
+    let dashData={}, driveStatus={configured:false,authorized:false},
+        saveTarget={}, saveOpt='device', schedMode='manual';
+    // CS stores per-course panel state: open/loaded/weeks/files/filter/activeWeek
+    const CS={};
+
+    // ── Boot ───────────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const r = await fetch('/api/auth/status');
+            if (!(await r.json()).loggedIn) { window.location.href='/index.html'; return; }
+        } catch { window.location.href='/index.html'; return; }
+        await Promise.all([initDrive(), initChanges()]);
+        const d = await fetchDash();
+        if (d) renderPage(d);
+    });
+
+    async function fetchDash() {
+        try {
+            const r = await fetch('/api/dashboard/summary');
+            if (r.status===401) { window.location.href='/index.html'; return null; }
+            if (!r.ok) { showErr((await r.json()).error||'Failed'); return null; }
+            dashData = await r.json(); return dashData;
+        } catch(e) { showErr(e.message); return null; }
+    }
+
+    async function initDrive() {
+        try { const r=await fetch('/api/drive/status'); if(r.ok) driveStatus=await r.json(); } catch {}
+    }
+    async function initChanges() {
+        try {
+            const r=await fetch('/api/changes/status'); if(!r.ok) return;
+            const s=await r.json();
+            if(!s.hasSnapshot) { await fetch('/api/changes/snapshot',{method:'POST'}); }
+            else { sessionStorage.setItem('lastChecked',s.lastChecked); }
+        } catch {}
+    }
+
+    // ── Render Page ────────────────────────────────────────────────────────────
+    function renderPage(data) {
+        const localUser = JSON.parse(localStorage.getItem('lmsUser'));
+        const fullName  = data.fullName || localUser?.fullName || 'User';
+        document.getElementById('navUserName').textContent  = fullName;
+        document.getElementById('avatarLetter').textContent = fullName.charAt(0).toUpperCase();
+
+        const fn=fullName.split(' ')[0], uc=data.urgentCount,
+            ec=data.upcomingEvents.length,
+            qc=data.upcomingEvents.filter(e=>e.eventType==='quiz').length;
+        const sorted=[...data.courses].sort((a,b)=>{
+            if(a.favorite&&!b.favorite) return -1;
+            if(!a.favorite&&b.favorite) return 1;
+            return a.fullName.localeCompare(b.fullName);
+        });
+        const lc = sessionStorage.getItem('lastChecked');
+
+        document.getElementById('pageContent').innerHTML=`
+    <div class="mb-3 d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div><h1 style="font-size:1.45rem;font-weight:800;margin:0">Good day, ${safe(fn)} 👋</h1>
+        <p style="font-size:.88rem;color:var(--muted);margin:4px 0 0">Your academic overview.</p></div>
+>>>>>>> 1906425 (jk)
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="btn-sm-act" onclick="openScheduleModal()"><i class="bi bi-clock me-1"></i>Auto-Sync</button>
+            <button class="btn-sm-act primary" id="syncBtn" onclick="syncNow()"><i class="bi bi-arrow-repeat me-1"></i>Sync Now</button>
+        </div>
+    </div>
+<<<<<<< HEAD
+    ${
+            uc>0?`<div class="urgent-banner mb-3"><i class="bi bi-exclamation-triangle-fill fs-5"></i><span>You have <strong>${
+                uc
+            }</strong> deadline${
+                uc>1?'s':''
+            } due within 3 days.</span><a href="/calendar.html" class="ms-auto text-decoration-underline" style="color:inherit;white-space:nowrap">View →</a></div>`:''
+        }
+    <div id="changesBar" class="mb-3">${
+            lc?`<div class="changes-bar"><i class="bi bi-broadcast" style="color:var(--yellow)"></i><span style="flex:1;font-size:.83rem">Last LMS check: <strong>${
+                safe(lc)
+            }</strong></span><button class="btn-sm-act" style="padding:4px 11px;font-size:.76rem" onclick="runChangeCheck()"><i class="bi bi-search me-1"></i>Check for New Files</button></div>`:'&nbsp;'
+        }</div>
+    <div id="driveBanner" class="drive-banner mb-4">${
+            driveBannerHTML()
+        }</div>
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Enrolled Courses</div><div class="stat-value val-blue">${
+            data.courses.length
+        }</div><div class="stat-sub">${
+            safe(data.siteName)
+        }</div></div></div>
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Urgent Deadlines</div><div class="stat-value val-red">${
+            uc
+        }</div><div class="stat-sub">Due within 3 days</div></div></div>
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Upcoming Events</div><div class="stat-value val-green">${
+            ec
+        }</div><div class="stat-sub">Next 14 days</div></div></div>
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Quizzes Ahead</div><div class="stat-value val-purple">${
+            qc
+        }</div><div class="stat-sub">Next 14 days</div></div></div>
+=======
+    ${uc>0?`<div class="urgent-banner mb-3"><i class="bi bi-exclamation-triangle-fill fs-5"></i>
+        <span>You have <strong>${uc}</strong> deadline${uc>1?'s':''} due within 3 days.</span>
+        <a href="/calendar.html" class="ms-auto text-decoration-underline" style="color:inherit;white-space:nowrap">View →</a></div>`:''}
+    <div id="changesBar" class="mb-3">${lc?`<div class="changes-bar">
+        <i class="bi bi-broadcast" style="color:var(--yellow)"></i>
+        <span style="flex:1;font-size:.83rem">Last LMS check: <strong>${safe(lc)}</strong></span>
+        <button class="btn-sm-act" style="padding:4px 11px;font-size:.76rem" onclick="runChangeCheck()">
+        <i class="bi bi-search me-1"></i>Check for New Files</button></div>`:'&nbsp;'}</div>
+    <div id="driveBanner" class="drive-banner mb-4">${driveBannerHTML()}</div>
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Enrolled Courses</div>
+            <div class="stat-value val-blue">${data.courses.length}</div>
+            <div class="stat-sub">${safe(data.siteName)}</div></div></div>
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Urgent Deadlines</div>
+            <div class="stat-value val-red">${uc}</div>
+            <div class="stat-sub">Due within 3 days</div></div></div>
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Upcoming Events</div>
+            <div class="stat-value val-green">${ec}</div>
+            <div class="stat-sub">Next 14 days</div></div></div>
+        <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-label">Quizzes Ahead</div>
+            <div class="stat-value val-purple">${qc}</div>
+            <div class="stat-sub">Next 14 days</div></div></div>
+>>>>>>> 1906425 (jk)
+    </div>
+    <div class="quick-actions">
+        <a href="/calendar.html" class="action-btn">📅 Calendar</a>
+        <a href="/files.html" class="action-btn">📂 File Manager</a>
+        <a href="/summarizer.html" class="action-btn">🤖 Summarizer</a>
+        <button class="action-btn" onclick="dlAll()">⬇️ Download All Courses</button>
+    </div>
+    <div class="row g-4">
+        <div class="col-12 col-lg-7">
+            <div class="section-card">
+<<<<<<< HEAD
+                <div class="section-head"><h2><i class="bi bi-journals me-2"></i>Enrolled Courses</h2><span class="head-badge">${
+            data.courses.length
+        } courses</span></div>
+                <div id="courseList">${
+            sorted.length?sorted.map(c=>buildCRow(c)).join(''):'<div class="empty-msg">No enrolled courses found.</div>'
+        }</div>
+=======
+                <div class="section-head"><h2><i class="bi bi-journals me-2"></i>Enrolled Courses</h2>
+                <span class="head-badge">${data.courses.length} courses</span></div>
+                <div id="courseList">${sorted.length?sorted.map(c=>buildCRow(c)).join('')
+            :'<div class="empty-msg">No enrolled courses found.</div>'}</div>
+>>>>>>> 1906425 (jk)
+            </div>
+        </div>
+        <div class="col-12 col-lg-5">
+            <div class="section-card">
+<<<<<<< HEAD
+                <div class="section-head"><h2><i class="bi bi-alarm me-2"></i>Upcoming Deadlines</h2><a href="/calendar.html" style="font-size:.78rem;color:var(--accent);text-decoration:none">View all →</a></div>
+                ${
+            data.upcomingEvents.length?data.upcomingEvents.map(e=>{
+                const d=Math.ceil(e.timeUntilDue/86400);const l=d<=0?'Today':d===1?'Tomorrow':d+'d';return`<div class="deadline-item"><div class="dl-dot" style="background:${
+                    e.color
+                }"></div><div style="flex:1;min-width:0"><div class="dl-title">${
+                    safe(e.title)
+                }</div><div class="dl-course">${
+                    safe(e.courseName)
+                }</div></div><span class="dl-when" style="background:${
+                    e.color
+                }">${
+                    l
+                }</span></div>`;
+            }).join(''):'<div class="empty-msg">No deadlines in 14 days 🎉</div>'
+        }
+=======
+                <div class="section-head"><h2><i class="bi bi-alarm me-2"></i>Upcoming Deadlines</h2>
+                <a href="/calendar.html" style="font-size:.78rem;color:var(--accent);text-decoration:none">View all →</a></div>
+                ${data.upcomingEvents.length?data.upcomingEvents.map(e=>{
+            const d=Math.ceil(e.timeUntilDue/86400);
+            const l=d<=0?'Today':d===1?'Tomorrow':d+'d';
+            return`<div class="deadline-item">
+                        <div class="dl-dot" style="background:${e.color}"></div>
+                        <div style="flex:1;min-width:0">
+                            <div class="dl-title">${safe(e.title)}</div>
+                            <div class="dl-course">${safe(e.courseName)}</div>
+                        </div>
+                        <span class="dl-when" style="background:${e.color}">${l}</span></div>`;
+        }).join(''):'<div class="empty-msg">No deadlines in 14 days 🎉</div>'}
+>>>>>>> 1906425 (jk)
+            </div>
+        </div>
+    </div>`;
+    }
+
+<<<<<<< HEAD
+    // Course Row
+    function buildCRow(c){
+        if(!CS[c.id])CS[c.id]={
+            open:false,loaded:false,activeWeek:-1,weeks:[],files:[],filter:'all'
+        };
+        const nb=c.newFilesCount>0?`<span class="new-badge">🔴 ${
+            c.newFilesCount
+        } new</span>`:'';
+        const ins=c.instructorName?`<span><i class="bi bi-person-fill"></i> ${
+            safe(c.instructorName)
+        }</span>`:'';
+        const la=c.lastAccess>0?`<span><i class="bi bi-clock"></i> ${
+            timeAgo(c.lastAccess)
+        }</span>`:'';
+        return`<div class="course-row${c.favorite?' is-fav':''}" id="cr-${
+            c.id
+        }">
+    <div class="course-header" onclick="togCourse(${
+            c.id
+        },'${
+            safe(c.shortName)
+        }')">
+        <i class="bi bi-chevron-right course-chevron" id="chev-${
+            c.id
+        }"></i>
+        <div style="flex:1;min-width:0"><div class="course-name">${
+            safe(c.fullName)
+        }</div><div class="course-meta">${
+            ins
+        }${
+            la
+        }</div></div>
+        ${
+            nb
+        }
+        <button class="btn-star ${
+            c.favorite?'starred':'unstarred'
+        }" id="star-${
+            c.id
+        }" onclick="event.stopPropagation();togFav(${
+            c.id
+        },this)" title="${
+            c.favorite?'Unpin':'Pin to top'
+        }">${
+            c.favorite?'⭐':'☆'
+        }</button>
+        <div class="course-actions" onclick="event.stopPropagation()">
+            <button class="btn-sm-act primary" id="dlbtn-${
+            c.id
+        }" onclick="openSaveMod(${
+            c.id
+        },'${
+            safe(c.shortName)
+        }','course')"><i class="bi bi-download"></i> Download</button>
+            ${
+            driveStatus.authorized?`<button class="btn-sm-act drive" id="drivebtn-${
+                c.id
+            }" onclick="upDrive('${
+                safe(c.shortName)
+            }',${c.id
+            })"><i class="bi bi-cloud-upload"></i></button>`:''
+        }
+        </div>
+    </div>
+    <div class="course-panel" id="panel-${
+            c.id
+        }"></div>
+</div>`;
+    }
+
+    // Favorites
+    async function togFav(id,btn){
+        const isFav=btn.classList.contains('starred');
+        await fetch(`/api/favorites/${
+            id
+        }`,{
+            method:isFav?'DELETE':'POST'
+        });
+        btn.classList.toggle('starred',!isFav);btn.classList.toggle('unstarred',isFav);
+        btn.textContent=isFav?'☆':'⭐';
+=======
+    // ── Course Row ─────────────────────────────────────────────────────────────
+    function buildCRow(c) {
+        if (!CS[c.id]) CS[c.id]={open:false,loaded:false,activeWeek:-1,weeks:[],files:[],filter:'all'};
+        const nb = c.newFilesCount>0?`<span class="new-badge">🔴 ${c.newFilesCount} new</span>`:'';
+        const ins = c.instructorName?`<span><i class="bi bi-person-fill"></i> ${safe(c.instructorName)}</span>`:'';
+        const la  = c.lastAccess>0?`<span><i class="bi bi-clock"></i> ${timeAgo(c.lastAccess)}</span>`:'';
+        return `<div class="course-row${c.favorite?' is-fav':''}" id="cr-${c.id}">
+    <div class="course-header" onclick="togCourse(${c.id},'${safe(c.shortName)}')">
+        <i class="bi bi-chevron-right course-chevron" id="chev-${c.id}"></i>
+        <div style="flex:1;min-width:0">
+            <div class="course-name">${safe(c.fullName)}</div>
+            <div class="course-meta">${ins}${la}</div>
+        </div>
+        ${nb}
+        <button class="btn-star ${c.favorite?'starred':'unstarred'}" id="star-${c.id}"
+            onclick="event.stopPropagation();togFav(${c.id},this)"
+            title="${c.favorite?'Unpin':'Pin to top'}">${c.favorite?'⭐':'☆'}</button>
+        <div class="course-actions" onclick="event.stopPropagation()">
+            <button class="btn-sm-act primary" id="dlbtn-${c.id}"
+                onclick="openSaveMod(${c.id},'${safe(c.shortName)}','course')">
+                <i class="bi bi-download"></i> Download</button>
+            ${driveStatus.authorized?`<button class="btn-sm-act drive" id="drivebtn-${c.id}"
+                onclick="upDrive('${safe(c.shortName)}',${c.id})">
+                <i class="bi bi-cloud-upload"></i></button>`:''}
+        </div>
+    </div>
+    <div class="course-panel" id="panel-${c.id}"></div>
+</div>`;
+    }
+
+    // ── Favorites ──────────────────────────────────────────────────────────────
+    async function togFav(id, btn) {
+        const isFav = btn.classList.contains('starred');
+        await fetch(`/api/favorites/${id}`, {method: isFav?'DELETE':'POST'});
+        btn.classList.toggle('starred',!isFav); btn.classList.toggle('unstarred',isFav);
+        btn.textContent = isFav?'☆':'⭐';
+>>>>>>> 1906425 (jk)
+        document.getElementById('cr-'+id)?.classList.toggle('is-fav',!isFav);
+        showToast(isFav?'Course unpinned.':'Course pinned ⭐');
+    }
+
+<<<<<<< HEAD
+    // Toggle Course
+    async function togCourse(id,sn){
+        const s=CS[id],p=document.getElementById('panel-'+id),ch=document.getElementById('chev-'+id);
+        s.open=!s.open;p.classList.toggle('open',s.open);ch.classList.toggle('open',s.open);
+        if(!s.open)return;
+        if(!s.loaded){
+            p.innerHTML='<div class="loading-row"><span class="spinner-sm me-2"></span>Loading...</div>';await loadCourse(id,sn);
+        }
+    }
+    async function loadCourse(id,sn){
+        const s=CS[id];
+        try{
+            const[wR,fR]=await Promise.all([fetch(`/api/courses/${
+                id
+            }/weeks?shortName=${
+                encodeURIComponent(sn)
+            }`),fetch(`/api/courses/${
+                id
+            }/files`)]);
+            s.weeks=wR.ok?await wR.json():[];s.files=fR.ok?await fR.json():[];s.loaded=true;
+        }catch(e){
+            document.getElementById('panel-'+id).innerHTML=`<div class="empty-msg" style="color:var(--red)">Failed: ${safe(e.message)}</div>`;return;
+        }
+        renderPanel(id,sn);
+    }
+    function renderPanel(id,sn){
+        const s=CS[id],p=document.getElementById('panel-'+id);
+        if(!s.weeks.length&&!s.files.length){
+            p.innerHTML='<div class="empty-msg">No downloadable files found.</div>';return;
+        }
+        let tabs=`<div class="week-tab active" onclick="swTab(${
+            id
+        },'${
+            safe(sn)
+        }',-1,this)">All (${
+            s.files.length
+        })</div>`;
+        s.weeks.forEach((w,i)=>{
+            const hf=w.files&&w.files.length>0;tabs+=`<div class="week-tab${
+                hf?' has-files':''
+            }" onclick="swTab(${
+                id
+            },'${
+                safe(sn)
+            }',${
+                i
+            },this)">${
+                safe(w.sectionName||w.dateRange||'Week '+w.sectionNumber)
+            }</div>`;
+=======
+    // ── Toggle Course Panel ────────────────────────────────────────────────────
+    // FIX 1 (dropdown): togCourse now stores shortName in CS so it's available
+    // when the panel is already loaded and re-opened without a network call.
+    // Previously on second open, sn was correct but was never forwarded into
+    // loadCourse — now the shortName comes from the function parameter reliably.
+    async function togCourse(id, sn) {
+        const s=CS[id], p=document.getElementById('panel-'+id), ch=document.getElementById('chev-'+id);
+        s.open = !s.open;
+        p.classList.toggle('open', s.open);
+        ch.classList.toggle('open', s.open);   // FIX 1b: chevron rotates on both open AND close
+        if (!s.open) return;
+        if (!s.loaded) {
+            p.innerHTML='<div class="loading-row"><span class="spinner-sm me-2"></span>Loading files...</div>';
+            await loadCourse(id, sn);
+        }
+    }
+
+    // FIX 2 (files endpoint): loadCourse now passes ?shortName= when fetching
+    // /api/courses/{id}/files. Without this the backend built a Course with
+    // shortName = courseId number, so files were looked for in downloads/12345/
+    // instead of downloads/CS101/ — they were never found and the list was empty.
+    async function loadCourse(id, sn) {
+        const s = CS[id];
+        try {
+            const [wR, fR] = await Promise.all([
+                fetch(`/api/courses/${id}/weeks?shortName=${encodeURIComponent(sn)}`),
+                fetch(`/api/courses/${id}/files?shortName=${encodeURIComponent(sn)}`)  // ← FIX 2
+            ]);
+            s.weeks = wR.ok ? await wR.json() : [];
+            s.files = fR.ok ? await fR.json() : [];
+            s.loaded = true;
+        } catch(e) {
+            document.getElementById('panel-'+id).innerHTML=
+                `<div class="empty-msg" style="color:var(--red)">Failed to load: ${safe(e.message)}</div>`;
+            return;
+        }
+        renderPanel(id, sn);
+    }
+
+    // ── Render Panel ───────────────────────────────────────────────────────────
+    function renderPanel(id, sn) {
+        const s=CS[id], p=document.getElementById('panel-'+id);
+        if (!s.weeks.length && !s.files.length) {
+            p.innerHTML='<div class="empty-msg">No downloadable files found.</div>'; return;
+        }
+        let tabs=`<div class="week-tab active" onclick="swTab(${id},'${safe(sn)}',-1,this)">All (${s.files.length})</div>`;
+        s.weeks.forEach((w,i)=>{
+            const hf=w.files&&w.files.length>0;
+            tabs+=`<div class="week-tab${hf?' has-files':''}" onclick="swTab(${id},'${safe(sn)}',${i},this)">${safe(w.sectionName||w.dateRange||'Week '+w.sectionNumber)}</div>`;
+>>>>>>> 1906425 (jk)
+        });
+        p.innerHTML=`
+    <div class="panel-toolbar">
+        <div class="toolbar-left">
+<<<<<<< HEAD
+            <button class="btn-sm-act primary" id="dlall-${
+            id
+        }" onclick="openSaveMod(${
+            id
+        },'${
+            safe(sn)
+        }','all')"><i class="bi bi-download me-1"></i>Download All</button>
+            <button class="btn-sm-act" id="dlweek-${
+            id
+        }" style="display:none" onclick="openSaveMod(${
+            id
+        },'${
+            safe(sn)
+        }','week')"><i class="bi bi-download me-1"></i>This Week</button>
+            <button class="btn-sm-act" onclick="dlLatest(${
+            id
+        },'${
+            safe(sn)
+        }')"><i class="bi bi-stars me-1"></i>Latest Only</button>
+            ${
+            driveStatus.authorized?`<button class="btn-sm-act drive" onclick="upDrive('${
+                safe(sn)
+            }',${
+                id
+            })"><i class="bi bi-cloud-upload me-1"></i>Drive</button>`:''
+        }
+        </div>
+        <div class="d-flex gap-1 flex-wrap">
+            <span class="type-chip active" onclick="setFilter(${
+            id
+        },this,'all')">All</span>
+            <span class="type-chip" onclick="setFilter(${
+            id
+        },this,'pdf')">PDF</span>
+            <span class="type-chip" onclick="setFilter(${
+            id
+        },this,'pptx')">Slides</span>
+            <span class="type-chip" onclick="setFilter(${
+            id
+        },this,'video')">Video</span>
+            <span class="type-chip" onclick="setFilter(${
+            id
+        },this,'docx')">Docs</span>
+            <span class="type-chip" onclick="setFilter(${
+            id
+        },this,'zip')">ZIP</span>
+        </div>
+    </div>
+    <div id="selbar-${
+            id
+        }" style="display:none;padding:8px 16px;font-size:.78rem;color:var(--accent);background:rgba(79,142,247,.06);border-bottom:1px solid var(--border)">
+        <span id="selcnt-${
+            id
+        }">0</span> selected — <button class="btn-sm-act primary" style="padding:3px 10px;font-size:.74rem" onclick="dlSel(${
+            id
+        },'${
+            safe(sn)
+        }')">Download Selected</button>
+        <button class="btn-sm-act" style="padding:3px 10px;font-size:.74rem;margin-left:4px" onclick="clrSel(${
+            id
+        })">Clear</button>
+    </div>
+    <div class="week-tabs">${
+            tabs
+        }</div>
+    <div class="file-list" id="fl-${
+            id
+        }">${
+            renderFiles(s.files,id)
+        }</div>`;
+    }
+    function swTab(id,sn,wi,el){
+        const s=CS[id];el.closest('.week-tabs').querySelectorAll('.week-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');s.activeWeek=wi;
+        const files=wi===-1?s.files:(s.weeks[wi]?s.weeks[wi].files||[]:[]);
+        document.getElementById('fl-'+id).innerHTML=renderFiles(filtFiles(files,s.filter),id);
+        const wb=document.getElementById('dlweek-'+id);if(wb)wb.style.display=wi>=0&&files.length?'inline-flex':'none';
+    }
+    function setFilter(id,chip,f){
+        const s=CS[id];s.filter=f;chip.closest('.panel-toolbar').querySelectorAll('.type-chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');
+        const files=s.activeWeek===-1?s.files:(s.weeks[s.activeWeek]?s.weeks[s.activeWeek].files||[]:[]);
+        document.getElementById('fl-'+id).innerHTML=renderFiles(filtFiles(files,f),id);
+    }
+    function filtFiles(files,f){
+        if(!f||f==='all')return files;
+        const ext={
+            pdf:['pdf'],pptx:['pptx','ppt'],video:['mp4','mkv','avi','mov'],docx:['docx','doc'],zip:['zip','rar','7z']
+        };
+        const a=ext[f]||[];return files.filter(f=>{
+            const e=(f.fileName||'').split('.').pop().toLowerCase();return a.includes(e);
+        });
+    }
+    function renderFiles(files,id){
+        if(!files||!files.length)return'<div class="empty-msg" style="padding:14px">No files in this view.</div>';
+        return files.map(f=>{const ext=(f.fileName||'').split('.').pop().toLowerCase();const ic=fIcon(ext);
+            return`<div class="file-item"><input type="checkbox" class="file-checkbox" onchange="onCbk(${
+                id
+            })"><div class="file-icon-sm ${
+                ic.cls
+            }">${
+                ic.em
+            }</div><span class="file-name" title="${
+                safe(f.fileName)
+            }">${safe(f.fileName)
+            }</span><span class="file-size">${
+                fmtBytes(f.fileSize||0)
+            }</span></div>`;
+        }).join('');
+    }
+    function onCbk(id){
+        const n=document.querySelectorAll(`#fl-${
+            id
+        } .file-checkbox:checked`).length;const sb=document.getElementById('selbar-'+id);const sc=document.getElementById('selcnt-'+id);if(sb)sb.style.display=n>0?'block':'none';if(sc)sc.textContent=n;
+    }
+    function clrSel(id){
+        document.querySelectorAll(`#fl-${
+            id
+        } .file-checkbox`).forEach(c=>c.checked=false);onCbk(id);
+    }
+    async function dlSel(id,sn){
+        const n=document.querySelectorAll(`#fl-${
+            id
+        } .file-checkbox:checked`).length;if(!n){
+            showToast('No files selected.',true);return;
+        }showToast(`Smart syncing ${
+            n
+        } files (unchanged files will be skipped)...`);await doCourse(id,sn);clrSel(id);
+    }
+
+    // Save Modal
+    function openSaveMod(id,sn,type){
+        saveTarget={
+            id,sn,type
+        };saveOpt='device';selectSaveOpt('device');
+        document.getElementById('saveModalLabel').textContent={
+            course:`Download all files — ${
+            sn
+        }`,all:`Download all files — ${
+                sn
+            }`,week:`Download this week — ${
+                sn
+            }`
+        }[type]||sn;
+        ['opt-drive','opt-both'].forEach(k=>{const el=document.getElementById(k);if(el)el.style.display=driveStatus.authorized?'flex':'none';
+        });
+        document.getElementById('saveModal').classList.add('open');
+    }
+    function selectSaveOpt(o){
+        saveOpt=o;['device','drive','both'].forEach(k=>{const el=document.getElementById('opt-'+k);if(el){el.classList.toggle('selected',k===o);el.querySelector('input').checked=(k===o);
+        }
+        });
+    }
+    function closeSaveModal(){
+        document.getElementById('saveModal').classList.remove('open');
+    }
+    async function confirmSave(){
+        closeSaveModal();const{
+            id,sn,type
+        }=saveTarget;
+        if(type==='week')await dlWeek(id,sn);else await doCourse(id,sn);
+        if((saveOpt==='drive'||saveOpt==='both')&&driveStatus.authorized)await upDrive(sn,id);
+    }
+
+    // Download helpers
+    async function doCourse(id,sn){
+        const btn=document.getElementById('dlbtn-'+id)||document.getElementById('dlall-'+id);
+        if(btn){
+            btn.disabled=true;btn.innerHTML='<span class="spinner-sm me-1"></span>Downloading...';
+        }
+        try{
+            const r=await fetch(`/api/download/${id}`,{
+                method:'POST',headers:{
+                    'Content-Type':'application/json'
+                },body: JSON.stringify({
+                    shortName: sn,
+                    saveOption: saveOpt   // 🔥 IMPORTANT
+                })
+            });
+            const d=await r.json();
+            if(r.ok){
+                if(btn){
+                    btn.classList.add('success');btn.innerHTML=`<i class="bi bi-check-lg me-1"></i>Done (${
+                        d.downloaded
+                    })`;
+                }
+                const p=[];if(d.downloaded)p.push(`${
+                    d.downloaded
+                } new`);if(d.updated)p.push(`${
+                    d.updated
+                } updated`);if(d.skipped)p.push(`${
+                    d.skipped
+                } unchanged`);
+                showToast(`${
+                    sn
+                }: `+p.join(', ')+'.');
+            }else{
+                if(btn){
+                    btn.disabled=false;btn.innerHTML='<i class="bi bi-download"></i> Download';
+                }showToast(d.error||'Download failed.',true);
+            }
+        }catch(e){
+            if(btn){
+                btn.disabled=false;btn.innerHTML='<i class="bi bi-download"></i> Download';
+            }showToast(e.message,true);
+        }
+    }
+    async function dlWeek(id,sn){
+        const s=CS[id];if(s.activeWeek<0||!s.weeks[s.activeWeek])return;
+        const w=s.weeks[s.activeWeek],btn=document.getElementById('dlweek-'+id);
+        if(btn){btn.disabled=true;btn.innerHTML='<span class="spinner-sm me-1"></span>...';}
+        try{
+            const r=await fetch(`/api/courses/${id}/weeks/download`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({shortName:sn,sectionNumbers:[w.sectionNumber]})});
+            const d=await r.json();
+            if(r.ok){if(btn){btn.classList.add('success');btn.innerHTML=`<i class="bi bi-check-lg me-1"></i>Done (${d.downloaded})`;}showToast(`Week: ${d.downloaded} new, ${d.skipped||0} unchanged.`);}
+            else{
+                if(btn){
+                    btn.disabled=false;btn.innerHTML='<i class="bi bi-download me-1"></i>This Week';
+                }showToast(d.error||'Failed.',true);
+            }
+        }catch(e) {
+            if(btn){btn.disabled=false;btn.innerHTML='<i class="bi bi-download me-1"></i>This Week';
+            }showToast(e.message,true);
+        }
+    }
+    async function dlLatest(id,sn){
+        showToast(`Smart sync for ${
+            sn
+        }...`);await doCourse(id,sn);
+    }
+    async function dlAll(){
+        if(!dashData)return;showToast('Starting smart sync for all courses...');for(const c of dashData.courses)await doCourse(c.id,c.shortName);showToast('All courses synced!');
+    }
+
+    // Sync Now
+    async function syncNow(){
+        const btn=document.getElementById('syncBtn');if(btn){
+            btn.disabled=true;btn.innerHTML='<span class="spinner-sm me-1"></span>Syncing...';
+        }
+        try{
+            const r=await fetch('/api/scheduler/run-now',{
+                method:'POST'
+            });const d=await r.json();showToast(d.message||'Sync complete.');
+        }
+        catch(e){
+            showToast(e.message,true);
+        }
+        finally{
+            if(btn){
+                btn.disabled=false;btn.innerHTML='<i class="bi bi-arrow-repeat me-1"></i>Sync Now';
+            }
+        }
+    }
+
+    // Schedule Modal
+    async function openScheduleModal(){
+        try{const r=await fetch('/api/scheduler/config');if(r.ok){const c=await r.json();selectSched(c.mode||'manual');document.getElementById('schedHour').value=c.hourOfDay??2;document.getElementById('driveAutoToggle').checked=!!c.driveAutoSync;const lr=document.getElementById('lastRunDisplay');if(lr)lr.textContent=c.lastRunAt?`Last: ${
+            c.lastRunAt
+        } — ${
+            c.lastRunResult||''
+        }`:'';
+        }
+        }catch{
+
+        }document.getElementById('scheduleModal').classList.add('open');
+    }
+    function selectSched(m){
+        schedMode=m;['manual','daily','weekly'].forEach(k=>{
+            const el=document.getElementById('sched-'+k);if(el){
+                el.classList.toggle('selected',k===m);el.querySelector('input').checked=(k===m);
+            }
+        });const hr=document.getElementById('hourRow');if(hr)hr.style.display=m==='manual'?'none':'block';
+    }
+    async function saveSchedule(){
+        const cfg={mode:schedMode,hourOfDay:parseInt(document.getElementById('schedHour').value)||2,driveAutoSync:document.getElementById('driveAutoToggle').checked};
+        try{const r=await fetch('/api/scheduler/config',{
+            method:'POST',headers:{
+                'Content-Type':'application/json'
+            },body:JSON.stringify(cfg)
+        });const d=await r.json();document.getElementById('scheduleModal').classList.remove('open');showToast(r.ok?'Schedule saved.':(d.error||'Save failed.'),!r.ok);
+        }
+        catch(e){showToast(e.message,true);}
+    }
+
+    // Change Detection
+    async function runChangeCheck(){
+        const bar=document.getElementById('changesBar');if(bar)bar.innerHTML='<div class="changes-bar"><span class="spinner-sm me-2"></span>Scanning LMS for changes...</div>';
+        try{
+            const r=await fetch('/api/changes/check',{
+                method:'POST'
+            });const d=await r.json();if(!r.ok){showToast(d.error||'Check failed.',true);return;}
+            const tot=(d.newFiles?.length||0)+(d.updatedFiles?.length||0)+(d.removedFiles?.length||0);
+            sessionStorage.setItem('lastChecked',d.checkedAt);
+            if(tot===0){if(bar)bar.innerHTML=`<div class="changes-bar" style="color:var(--green)"><i class="bi bi-check-circle-fill"></i> No changes — LMS is up to date. <span style="margin-left:auto;font-size:.76rem;color:var(--muted)">Checked ${
+                safe(d.checkedAt)
+            }</span></div>`;return;
+            }
+            const parts=[];if(d.newFiles?.length)parts.push(`${
+                d.newFiles.length
+            } new`);if(d.updatedFiles?.length)parts.push(`${
+                d.updatedFiles.length
+            } updated`);if(d.removedFiles?.length)parts.push(`${
+                d.removedFiles.length
+            } removed`);
+            if(bar)bar.innerHTML=`<div class="changes-bar"><i class="bi bi-exclamation-circle" style="color:var(--yellow)"></i><span style="flex:1;font-size:.83rem"><strong>LMS Changes:</strong> ${
+                parts.join(', ')
+            }</span><button class="btn-sm-act primary" style="font-size:.76rem" onclick="dlAll()"><i class="bi bi-download me-1"></i>Download All Changes</button></div>`;
+            if(Notification.permission==='granted')new Notification('NUST LMS — New Content',{
+                body:parts.join(', ')+' detected on LMS.'
+            });
+            else if(Notification.permission!=='denied')Notification.requestPermission().then(p=>{
+                if(p==='granted')new Notification('NUST LMS',{body:parts.join(', ')+' found.'
+                });
+            });
+        }catch(e){
+            showToast(e.message,true);
+        }
+    }
+
+    // Drive
+    function driveBannerHTML(){
+        if(!driveStatus.configured)return`<div class="drive-dot nc"></div><div style="flex:1"><span style="font-weight:600;font-size:.88rem">Google Drive not configured</span><div style="font-size:.78rem;color:var(--muted);margin-top:2px">Add credentials.json to enable cloud backup.</div></div>`;
+        if(!driveStatus.authorized)return`<div class="drive-dot off"></div><div style="flex:1"><span style="font-weight:600;font-size:.88rem">Google Drive not connected</span><div style="font-size:.78rem;color:var(--muted);margin-top:2px">Connect to back up downloads automatically.</div></div><button class="btn-sm-act drive" onclick="connDrive()"><i class="bi bi-google me-1"></i>Connect Drive</button>`;
+        return`<div class="drive-dot on"></div><div style="flex:1"><span style="font-weight:600;font-size:.88rem;color:var(--green)">Google Drive connected</span><div style="font-size:.78rem;color:var(--muted);margin-top:2px">Sync available on each course panel.</div></div><button class="btn-sm-act" style="color:var(--red);border-color:var(--red)" onclick="discDrive()"><i class="bi bi-x-circle me-1"></i>Disconnect</button>`;
+    }
+    async function connDrive() {
+        try {
+            const res = await fetch('/api/drive/auth-url');
+            const data = await res.json();
+
+            if (!res.ok) {
+                showToast(data.error || 'Failed to start Google login.', true);
+                return;
+            }
+
+            // Redirect user to Google
+            window.location.href = data.authUrl;
+
+        } catch (e) {
+            showToast(e.message, true);
+        }
+    }
+    async function discDrive(){await fetch('/api/drive/disconnect',{method:'POST'});driveStatus.authorized=false;document.getElementById('driveBanner').innerHTML=driveBannerHTML();showToast('Drive disconnected.');renderPage(dashData);}
+    async function upDrive(sn,id){
+        const btn=document.getElementById('drivebtn-'+id);if(btn){btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span>';
+        }try{
+            const r=await fetch(`/api/drive/upload/${
+                encodeURIComponent(sn)
+            }`,{
+                method:'POST'
+            });const d=await r.json();if(r.ok){if(btn){
+                btn.classList.add('success');btn.innerHTML='<i class="bi bi-cloud-check"></i>';
+            }showToast(d.message||'Uploaded.');
+            }else{if(btn){
+                btn.disabled=false;btn.innerHTML='<i class="bi bi-cloud-upload"></i>';
+            }showToast(d.error||'Upload failed.',true);
+            }
+        }catch(e){if(btn){
+            btn.disabled=false;btn.innerHTML='<i class="bi bi-cloud-upload"></i>';
+        }showToast(e.message,true);
+        }
+    }
+
+    // Utilities
+    function fIcon(ext){
+        const m={pdf:'icon-pdf',
+            pptx:'icon-pptx',
+            ppt:'icon-pptx',
+            docx:'icon-docx',
+            doc:'icon-docx',
+            zip:'icon-zip',
+            rar:'icon-zip',
+            mp4:'icon-mp4',
+            xlsx:'icon-xlsx',
+            xls:'icon-xlsx'
+        };
+        const e={
+            pdf:'📄',
+            pptx:'📊',
+            ppt:'📊',
+            docx:'📝',
+            doc:'📝',
+            zip:'🗜',
+            rar:'🗜',
+            mp4:'🎬',
+            xlsx:'📈',
+            xls:'📈'
+        };return{
+            cls:m[ext]||'icon-file',em:e[ext]||'📎'
+        };
+    }
+    function fmtBytes(b){
+        if(!b||b===0)return'—';if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB';
+    }
+    function timeAgo(ts){
+        const s=Math.floor(Date.now()/1000-ts);if(s<60)return'Just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';if(s<604800)return Math.floor(s/86400)+'d ago';return new Date(ts*1000).toLocaleDateString('en-PK',{day:'numeric',month:'short'});
+    }
+    function safe(s){
+        if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+    function showErr(m){
+        document.getElementById('pageContent').innerHTML=`<div class="center-screen"><i class="bi bi-exclamation-circle" style="font-size:2rem;color:var(--red)"></i><p style="color:var(--red)">${
+            safe(m)
+        }</p><button class="btn-sm-act primary" onclick="location.reload()">Retry</button></div>`;
+    }
+    let _t;function showToast(m,e=false){
+        const el=document.getElementById('toast');el.textContent=m;el.style.borderColor=e?'var(--red)':'var(--border)';el.classList.add('show');clearTimeout(_t);_t=setTimeout(()=>el.classList.remove('show'),3800);
+    }
+    async function logout(){
+        await fetch('/api/auth/logout',{method:'POST'});window.location.href='/index.html';
+=======
+            <button class="btn-sm-act primary" id="dlall-${id}" onclick="openSaveMod(${id},'${safe(sn)}','all')">
+                <i class="bi bi-download me-1"></i>Download All</button>
+            <button class="btn-sm-act" id="dlweek-${id}" style="display:none" onclick="openSaveMod(${id},'${safe(sn)}','week')">
+                <i class="bi bi-download me-1"></i>This Week</button>
+            <button class="btn-sm-act" onclick="dlLatest(${id},'${safe(sn)}')">
+                <i class="bi bi-stars me-1"></i>Latest Only</button>
+            ${driveStatus.authorized?`<button class="btn-sm-act drive" onclick="upDrive('${safe(sn)}',${id})">
+                <i class="bi bi-cloud-upload me-1"></i>Drive</button>`:''}
+        </div>
+        <div class="d-flex gap-1 flex-wrap">
+            <span class="type-chip active" onclick="setFilter(${id},this,'all')">All</span>
+            <span class="type-chip" onclick="setFilter(${id},this,'pdf')">PDF</span>
+            <span class="type-chip" onclick="setFilter(${id},this,'pptx')">Slides</span>
+            <span class="type-chip" onclick="setFilter(${id},this,'video')">Video</span>
+            <span class="type-chip" onclick="setFilter(${id},this,'docx')">Docs</span>
+            <span class="type-chip" onclick="setFilter(${id},this,'zip')">ZIP</span>
+        </div>
+    </div>
+    <div id="selbar-${id}" style="display:none;padding:8px 16px;font-size:.78rem;color:var(--accent);background:rgba(79,142,247,.06);border-bottom:1px solid var(--border)">
+        <span id="selcnt-${id}">0</span> selected —
+        <button class="btn-sm-act primary" style="padding:3px 10px;font-size:.74rem" onclick="dlSel(${id},'${safe(sn)}')">Download Selected</button>
+        <button class="btn-sm-act" style="padding:3px 10px;font-size:.74rem;margin-left:4px" onclick="clrSel(${id})">Clear</button>
+    </div>
+    <div class="week-tabs">${tabs}</div>
+    <div class="file-list" id="fl-${id}">${renderFiles(s.files, id, sn)}</div>`;
+    }
+
+    // ── Week Tabs & Filters ────────────────────────────────────────────────────
+    function swTab(id, sn, wi, el) {
+        const s=CS[id];
+        el.closest('.week-tabs').querySelectorAll('.week-tab').forEach(t=>t.classList.remove('active'));
+        el.classList.add('active'); s.activeWeek=wi;
+        const files = wi===-1 ? s.files : (s.weeks[wi]?s.weeks[wi].files||[]:[]);
+        document.getElementById('fl-'+id).innerHTML = renderFiles(filtFiles(files, s.filter), id, sn);
+        const wb=document.getElementById('dlweek-'+id);
+        if(wb) wb.style.display = (wi>=0&&files.length)?'inline-flex':'none';
+    }
+
+    function setFilter(id, chip, f) {
+        const s=CS[id]; s.filter=f;
+        chip.closest('.panel-toolbar').querySelectorAll('.type-chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        const files = s.activeWeek===-1 ? s.files : (s.weeks[s.activeWeek]?s.weeks[s.activeWeek].files||[]:[]);
+        document.getElementById('fl-'+id).innerHTML = renderFiles(filtFiles(files, f), id);
+    }
+
+    function filtFiles(files, f) {
+        if (!f||f==='all') return files;
+        const ext={pdf:['pdf'],pptx:['pptx','ppt'],video:['mp4','mkv','avi','mov'],docx:['docx','doc'],zip:['zip','rar','7z']};
+        const a=ext[f]||[];
+        // FIX 3 (filter): variable shadowing bug — inner loop variable was also named 'f'
+        // which overwrote the filter string, so the filter always evaluated against the
+        // last file's extension instead of the chosen type. Renamed to 'file'.
+        return files.filter(file=>{
+            const e=(file.fileName||'').split('.').pop().toLowerCase();
+            return a.includes(e);
+        });
+    }
+
+    // ── File List Rendering ────────────────────────────────────────────────────
+    // FIX 4 (checkboxes / selection bar): renderFiles now stores each file's
+    // fileName in a data-filename attribute on the file-item div.
+    // dlSel reads these to build a list of selected file names and sends them
+    // to the backend — previously dlSel just called doCourse() which downloaded
+    // everything instead of only the checked files.
+    function renderFiles(files, id, sn) {
+        if (!files||!files.length) return '<div class="empty-msg" style="padding:14px">No files in this view.</div>';
+        return files.map(f=>{
+            const ext=(f.fileName||'').split('.').pop().toLowerCase();
+            const ic=fIcon(ext);
+            return `<div class="file-item" data-filename="${safe(f.fileName)}">
+                <input type="checkbox" class="file-checkbox" onchange="onCbk(${id})">
+                <div class="file-icon-sm ${ic.cls}">${ic.em}</div>
+                <span class="file-name" title="${safe(f.fileName)}">${safe(f.fileName)}</span>
+                <span class="file-size">${fmtBytes(f.fileSize||0)}</span>
+            </div>`;
+        }).join('');
+    }
+
+    function onCbk(id) {
+        const n=document.querySelectorAll(`#fl-${id} .file-checkbox:checked`).length;
+        const sb=document.getElementById('selbar-'+id);
+        const sc=document.getElementById('selcnt-'+id);
+        if(sb) sb.style.display=n>0?'block':'none';
+        if(sc) sc.textContent=n;
+    }
+
+    function clrSel(id) {
+        document.querySelectorAll(`#fl-${id} .file-checkbox`).forEach(c=>c.checked=false);
+        onCbk(id);
+    }
+
+    // FIX 4 (selected download): dlSel now collects the actual checked filenames
+    // and POSTs them to /api/download/{id} with a fileNames array.
+    // Previously it just called doCourse() which downloaded ALL files regardless
+    // of what was checked, ignoring the selection entirely.
+    async function dlSel(id, sn) {
+        const checked = [...document.querySelectorAll(`#fl-${id} .file-checkbox:checked`)];
+        if (!checked.length) { showToast('No files selected.', true); return; }
+
+        // walk up from checkbox to file-item div to read the filename
+        const fileNames = checked.map(cb => cb.closest('.file-item')?.dataset.filename).filter(Boolean);
+        if (!fileNames.length) { showToast('Could not read selected filenames.', true); return; }
+
+        showToast(`Downloading ${fileNames.length} selected file(s)...`);
+
+        try {
+            const r = await fetch(`/api/download/${id}`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ shortName: sn, saveOption: saveOpt, fileNames })
+            });
+            const d = await r.json();
+            if (r.ok) {
+                showToast(`Done: ${d.downloaded||0} downloaded, ${d.skipped||0} unchanged.`);
+                clrSel(id);
+            } else {
+                showToast(d.error||'Download failed.', true);
+            }
+        } catch(e) {
+            showToast(e.message, true);
+        }
+    }
+
+    // ── Save Modal ─────────────────────────────────────────────────────────────
+    function openSaveMod(id, sn, type) {
+        saveTarget={id,sn,type}; saveOpt='device'; selectSaveOpt('device');
+        document.getElementById('saveModalLabel').textContent =
+            {course:`Download all files — ${sn}`, all:`Download all files — ${sn}`, week:`Download this week — ${sn}`}[type]||sn;
+        ['opt-drive','opt-both'].forEach(k=>{
+            const el=document.getElementById(k);
+            if(el) el.style.display=driveStatus.authorized?'flex':'none';
+        });
+        document.getElementById('saveModal').classList.add('open');
+    }
+    function selectSaveOpt(o) {
+        saveOpt=o;
+        ['device','drive','both'].forEach(k=>{
+            const el=document.getElementById('opt-'+k);
+            if(el){el.classList.toggle('selected',k===o); el.querySelector('input').checked=(k===o);}
+        });
+    }
+    function closeSaveModal() { document.getElementById('saveModal').classList.remove('open'); }
+
+    async function confirmSave() {
+        closeSaveModal();
+        const {id,sn,type}=saveTarget;
+        if (type==='week') await dlWeek(id,sn); else await doCourse(id,sn);
+        if ((saveOpt==='drive'||saveOpt==='both') && driveStatus.authorized) await upDrive(sn,id);
+    }
+
+    // ── Download helpers ───────────────────────────────────────────────────────
+    async function doCourse(id, sn) {
+        const btn=document.getElementById('dlbtn-'+id)||document.getElementById('dlall-'+id);
+        if(btn){btn.disabled=true; btn.innerHTML='<span class="spinner-sm me-1"></span>Downloading...';}
+        try {
+            const r=await fetch(`/api/download/${id}`,{
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({shortName:sn, saveOption:saveOpt})
+            });
+            const d=await r.json();
+            if(r.ok){
+                if(btn){btn.classList.add('success'); btn.innerHTML=`<i class="bi bi-check-lg me-1"></i>Done (${d.downloaded})`;}
+                const p=[];
+                if(d.downloaded) p.push(`${d.downloaded} new`);
+                if(d.updated)    p.push(`${d.updated} updated`);
+                if(d.skipped)    p.push(`${d.skipped} unchanged`);
+                showToast(`${sn}: `+p.join(', ')+'.');
+            } else {
+                if(btn){btn.disabled=false; btn.innerHTML='<i class="bi bi-download"></i> Download';}
+                showToast(d.error||'Download failed.',true);
+            }
+        } catch(e) {
+            if(btn){btn.disabled=false; btn.innerHTML='<i class="bi bi-download"></i> Download';}
+            showToast(e.message,true);
+        }
+    }
+
+    async function dlWeek(id, sn) {
+        const s=CS[id];
+        if(s.activeWeek<0||!s.weeks[s.activeWeek]) return;
+        const w=s.weeks[s.activeWeek], btn=document.getElementById('dlweek-'+id);
+        if(btn){btn.disabled=true; btn.innerHTML='<span class="spinner-sm me-1"></span>...';}
+        try {
+            const r=await fetch(`/api/courses/${id}/weeks/download`,{
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({shortName:sn, sectionNumbers:[w.sectionNumber]})
+            });
+            const d=await r.json();
+            if(r.ok){
+                if(btn){btn.classList.add('success'); btn.innerHTML=`<i class="bi bi-check-lg me-1"></i>Done (${d.downloaded})`;}
+                showToast(`Week: ${d.downloaded} new, ${d.skipped||0} unchanged.`);
+            } else {
+                if(btn){btn.disabled=false; btn.innerHTML='<i class="bi bi-download me-1"></i>This Week';}
+                showToast(d.error||'Failed.',true);
+            }
+        } catch(e) {
+            if(btn){btn.disabled=false; btn.innerHTML='<i class="bi bi-download me-1"></i>This Week';}
+            showToast(e.message,true);
+        }
+    }
+
+    async function dlLatest(id,sn){showToast(`Smart sync for ${sn}...`); await doCourse(id,sn);}
+    async function dlAll(){
+        if(!dashData) return;
+        showToast('Starting smart sync for all courses...');
+        for(const c of dashData.courses) await doCourse(c.id,c.shortName);
+        showToast('All courses synced!');
+    }
+
+    // ── Sync Now ───────────────────────────────────────────────────────────────
+    async function syncNow() {
+        const btn=document.getElementById('syncBtn');
+        if(btn){btn.disabled=true; btn.innerHTML='<span class="spinner-sm me-1"></span>Syncing...';}
+        try {
+            const r=await fetch('/api/scheduler/run-now',{method:'POST'});
+            const d=await r.json(); showToast(d.message||'Sync complete.');
+        } catch(e){showToast(e.message,true);}
+        finally { if(btn){btn.disabled=false; btn.innerHTML='<i class="bi bi-arrow-repeat me-1"></i>Sync Now';} }
+    }
+
+    // ── Schedule Modal ─────────────────────────────────────────────────────────
+    async function openScheduleModal() {
+        try {
+            const r=await fetch('/api/scheduler/config');
+            if(r.ok){
+                const c=await r.json(); selectSched(c.mode||'manual');
+                document.getElementById('schedHour').value=c.hourOfDay??2;
+                document.getElementById('driveAutoToggle').checked=!!c.driveAutoSync;
+                const lr=document.getElementById('lastRunDisplay');
+                if(lr) lr.textContent=c.lastRunAt?`Last: ${c.lastRunAt} — ${c.lastRunResult||''}` :'';
+            }
+        } catch {}
+        document.getElementById('scheduleModal').classList.add('open');
+    }
+    function selectSched(m) {
+        schedMode=m;
+        ['manual','daily','weekly'].forEach(k=>{
+            const el=document.getElementById('sched-'+k);
+            if(el){el.classList.toggle('selected',k===m); el.querySelector('input').checked=(k===m);}
+        });
+        const hr=document.getElementById('hourRow');
+        if(hr) hr.style.display=m==='manual'?'none':'block';
+    }
+    async function saveSchedule() {
+        const cfg={mode:schedMode, hourOfDay:parseInt(document.getElementById('schedHour').value)||2,
+            driveAutoSync:document.getElementById('driveAutoToggle').checked};
+        try {
+            const r=await fetch('/api/scheduler/config',{method:'POST',
+                headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)});
+            const d=await r.json();
+            document.getElementById('scheduleModal').classList.remove('open');
+            showToast(r.ok?'Schedule saved.':(d.error||'Save failed.'),!r.ok);
+        } catch(e){showToast(e.message,true);}
+    }
+
+    // ── Change Detection ───────────────────────────────────────────────────────
+    async function runChangeCheck() {
+        const bar=document.getElementById('changesBar');
+        if(bar) bar.innerHTML='<div class="changes-bar"><span class="spinner-sm me-2"></span>Scanning LMS for changes...</div>';
+        try {
+            const r=await fetch('/api/changes/check',{method:'POST'});
+            const d=await r.json();
+            if(!r.ok){showToast(d.error||'Check failed.',true);return;}
+            const tot=(d.newFiles?.length||0)+(d.updatedFiles?.length||0)+(d.removedFiles?.length||0);
+            sessionStorage.setItem('lastChecked',d.checkedAt);
+            if(tot===0){
+                if(bar) bar.innerHTML=`<div class="changes-bar" style="color:var(--green)">
+                    <i class="bi bi-check-circle-fill"></i> No changes — LMS is up to date.
+                    <span style="margin-left:auto;font-size:.76rem;color:var(--muted)">Checked ${safe(d.checkedAt)}</span></div>`;
+                return;
+            }
+            const parts=[];
+            if(d.newFiles?.length)     parts.push(`${d.newFiles.length} new`);
+            if(d.updatedFiles?.length) parts.push(`${d.updatedFiles.length} updated`);
+            if(d.removedFiles?.length) parts.push(`${d.removedFiles.length} removed`);
+            if(bar) bar.innerHTML=`<div class="changes-bar">
+                <i class="bi bi-exclamation-circle" style="color:var(--yellow)"></i>
+                <span style="flex:1;font-size:.83rem"><strong>LMS Changes:</strong> ${parts.join(', ')}</span>
+                <button class="btn-sm-act primary" style="font-size:.76rem" onclick="dlAll()">
+                <i class="bi bi-download me-1"></i>Download All Changes</button></div>`;
+            if(Notification.permission==='granted')
+                new Notification('NUST LMS — New Content',{body:parts.join(', ')+' detected on LMS.'});
+            else if(Notification.permission!=='denied')
+                Notification.requestPermission().then(p=>{if(p==='granted') new Notification('NUST LMS',{body:parts.join(', ')+' found.'});});
+        } catch(e){showToast(e.message,true);}
+    }
+
+    // ── Drive ──────────────────────────────────────────────────────────────────
+    function driveBannerHTML() {
+        if(!driveStatus.configured) return`<div class="drive-dot nc"></div>
+            <div style="flex:1"><span style="font-weight:600;font-size:.88rem">Google Drive not configured</span>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:2px">Add credentials.json to enable cloud backup.</div></div>`;
+        if(!driveStatus.authorized) return`<div class="drive-dot off"></div>
+            <div style="flex:1"><span style="font-weight:600;font-size:.88rem">Google Drive not connected</span>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:2px">Connect to back up downloads automatically.</div></div>
+            <button class="btn-sm-act drive" onclick="connDrive()"><i class="bi bi-google me-1"></i>Connect Drive</button>`;
+        return`<div class="drive-dot on"></div>
+            <div style="flex:1"><span style="font-weight:600;font-size:.88rem;color:var(--green)">Google Drive connected</span>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:2px">Sync available on each course panel.</div></div>
+            <button class="btn-sm-act" style="color:var(--red);border-color:var(--red)" onclick="discDrive()">
+            <i class="bi bi-x-circle me-1"></i>Disconnect</button>`;
+    }
+    async function connDrive() {
+        try {
+            const res=await fetch('/api/drive/auth-url'); const data=await res.json();
+            if(!res.ok){showToast(data.error||'Failed to start Google login.',true);return;}
+            window.location.href=data.authUrl;
+        } catch(e){showToast(e.message,true);}
+    }
+    async function discDrive() {
+        await fetch('/api/drive/disconnect',{method:'POST'});
+        driveStatus.authorized=false;
+        document.getElementById('driveBanner').innerHTML=driveBannerHTML();
+        showToast('Drive disconnected.'); renderPage(dashData);
+    }
+    async function upDrive(sn, id) {
+        const btn=document.getElementById('drivebtn-'+id);
+        if(btn){btn.disabled=true; btn.innerHTML='<span class="spinner-sm"></span>';}
+        try {
+            const r=await fetch(`/api/drive/upload/${encodeURIComponent(sn)}`,{method:'POST'});
+            const d=await r.json();
+            if(r.ok){
+                if(btn){btn.classList.add('success'); btn.innerHTML='<i class="bi bi-cloud-check"></i>';}
+                showToast(d.message||'Uploaded.');
+            } else {
+                if(btn){btn.disabled=false; btn.innerHTML='<i class="bi bi-cloud-upload"></i>';}
+                showToast(d.error||'Upload failed.',true);
+            }
+        } catch(e){
+            if(btn){btn.disabled=false; btn.innerHTML='<i class="bi bi-cloud-upload"></i>';}
+            showToast(e.message,true);
+        }
+    }
+
+    // ── Utilities ──────────────────────────────────────────────────────────────
+    function fIcon(ext) {
+        const m={pdf:'icon-pdf',pptx:'icon-pptx',ppt:'icon-pptx',docx:'icon-docx',doc:'icon-docx',
+            zip:'icon-zip',rar:'icon-zip',mp4:'icon-mp4',xlsx:'icon-xlsx',xls:'icon-xlsx'};
+        const e={pdf:'📄',pptx:'📊',ppt:'📊',docx:'📝',doc:'📝',zip:'🗜',rar:'🗜',mp4:'🎬',xlsx:'📈',xls:'📈'};
+        return {cls:m[ext]||'icon-file', em:e[ext]||'📎'};
+    }
+    function fmtBytes(b){
+        if(!b||b===0) return '—';
+        if(b<1024) return b+' B';
+        if(b<1048576) return (b/1024).toFixed(1)+' KB';
+        return (b/1048576).toFixed(1)+' MB';
+    }
+    function timeAgo(ts){
+        const s=Math.floor(Date.now()/1000-ts);
+        if(s<60) return 'Just now'; if(s<3600) return Math.floor(s/60)+'m ago';
+        if(s<86400) return Math.floor(s/3600)+'h ago'; if(s<604800) return Math.floor(s/86400)+'d ago';
+        return new Date(ts*1000).toLocaleDateString('en-PK',{day:'numeric',month:'short'});
+    }
+    function safe(s){
+        if(!s) return '';
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+            .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+    function showErr(m){
+        document.getElementById('pageContent').innerHTML=
+            `<div class="center-screen"><i class="bi bi-exclamation-circle" style="font-size:2rem;color:var(--red)"></i>
+            <p style="color:var(--red)">${safe(m)}</p>
+            <button class="btn-sm-act primary" onclick="location.reload()">Retry</button></div>`;
+    }
+    let _t;
+    function showToast(m,e=false){
+        const el=document.getElementById('toast'); el.textContent=m;
+        el.style.borderColor=e?'var(--red)':'var(--border)';
+        el.classList.add('show'); clearTimeout(_t); _t=setTimeout(()=>el.classList.remove('show'),3800);
+    }
+    async function logout(){
+        await fetch('/api/auth/logout',{method:'POST'}); window.location.href='/index.html';
+>>>>>>> 1906425 (jk)
+    }
+</script>
+</body>
+</html>

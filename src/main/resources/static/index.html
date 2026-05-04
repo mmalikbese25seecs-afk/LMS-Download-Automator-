@@ -1,0 +1,122 @@
+<!-- HTML file for Login Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for Character Set and Responsive Design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUST - LMS Portal: Log in to the site</title>
+
+    <!-- Google Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Link to Bootstrap 5.3.8 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+    <!-- Link to style.css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Main Page Wrapper -->
+<div id="page-wrapper">
+    <div id="page-content">
+
+        <!-- Dark Mode Toggle Button (Top Right Corner) -->
+        <div class="toggle-row">
+            <button id="darkToggle" class="btn-toggle">🌙 Dark Mode</button>
+        </div>
+
+        <!-- NUST LMS Logo -->
+        <div class="logo-row">
+            <img src="https://lms.nust.edu.pk/portal/pluginfile.php/1/theme_moove/logo/1771565541/LMS%20Logo%20Final%20Shade.png"
+                 alt="NUST - LMS Portal"
+                 class="lms-logo">
+        </div>
+
+        <!-- Login Card Container -->
+        <div class="card-wrapper">
+
+            <!-- Login Panel (Split Layout: Info + Form) -->
+            <div class="lms-card loginpanel">
+
+                <!-- Left Panel: Information Section -->
+                <div class="info-panel">
+                    <h2>NUST - LMS Portal</h2>
+                    <hr>
+
+                    <!-- Information Items with Icons and Links -->
+                    <div class="info-items">
+                        <p class="info-item">
+                            <i class="fa fa-check-circle"></i>
+                            Cookies must be enabled in your browser
+                        </p>
+                        <p class="info-item">
+                            <i class="fa fa-phone"></i>
+                            <a href="#">LMS Focal Person (Institute Wise)</a>
+                        </p>
+                        <p class="info-item">
+                            <i class="fa fa-envelope"></i>
+                            <a href="mailto:lms@seecs.edu.pk">lms@seecs.edu.pk</a>
+                        </p>
+                        <p class="info-item">
+                            <i class="fa fa-question-circle"></i>
+                            <a href="#">Contact Us</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Login Form Section -->
+                <div class="form-panel">
+                    <p class="welcome-text">Already have an account?</p>
+
+                    <!-- Username Input Field -->
+                    <div class="lms-input-group">
+                        <label for="username" class="input-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></label>
+                        <input type="text" id="username" name="username" placeholder="Username" autocomplete="username" required>
+                    </div>
+
+                    <!-- Password Input Field -->
+                    <div class="lms-input-group">
+                        <label for="password" class="input-icon"><i class="fa fa-lock" aria-hidden="true"></i></label>
+                        <input type="password" id="password" name="password" placeholder="Password" autocomplete="current-password" required>
+                    </div>
+
+                    <!-- Remember Username Checkbox -->
+                    <div class="remember-row">
+                        <input type="checkbox" id="rememberusername" name="rememberusername">
+                        <label for="rememberusername">Remember username</label>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="button" class="btn-login">Log in</button>
+                    <!-- Error Message -->
+                    <div id="loginError" style="
+          color: #dc2626;
+          font-size: 0.875rem;
+          display: none;
+          margin-top: 4px;
+"></div>
+                    <!-- Forgot Password Link -->
+                    <div class="forgot-link">
+                        <a href="#">Forgotten your username or password?</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Link to Bootstrap 5.3.8 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Link to JavaScript for Dark Mode and Login Logic -->
+<script src="js/app.js"></script>
+
+</body>
+</html>

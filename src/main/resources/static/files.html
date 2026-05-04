@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        NUST LMS — File Manager
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:        #0b0d15; --surface: #10121d; --card:  #161929;
+            --border:    #222640; --accent:  #4f8ef7; --glow:  rgba(79,142,247,0.15);
+            --red:       #e74c3c; --orange:  #e67e22; --green: #2dd4bf;
+            --purple:    #a78bfa; --yellow:  #f59e0b; --muted: #5a6080;
+            --font:      'DM Sans', sans-serif;
+            --mono:      'JetBrains Mono', monospace;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font); background: var(--bg); color: #dde1f0; min-height: 100vh;
+        }
+
+        /* ── Nav ── */
+        .topnav {
+            background: var(--surface); border-bottom: 1px solid var(--border); height: 58px; position: sticky; top: 0; z-index: 1030;
+        }
+        .nav-brand {
+            font-size: 1.05rem; font-weight: 800; color: #dde1f0; text-decoration: none;
+        }
+        .nav-brand span {
+            color: var(--accent);
+        }
+        .nav-pill {
+            padding: 5px 14px; border-radius: 8px; font-size: 0.84rem; color: var(--muted); text-decoration: none; border: 1px solid transparent; transition: all 0.15s; font-weight: 500;
+        }
+        .nav-pill:hover {
+            background: var(--card); color: #dde1f0; border-color: var(--border);
+        }
+        .nav-pill.active {
+            background: var(--accent); color: #fff; border-color: var(--accent);
+        }
+        .user-avatar {
+            width:32px;height:32px;border-radius:50%;background:var(--accent);font-size:0.82rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;
+        }
+        .btn-logout {
+            background:transparent;border:1px solid var(--border);color:var(--muted);font-size:0.8rem;padding:4px 12px;border-radius:7px;transition:all 0.15s;cursor:pointer;font-family:var(--font);
+        }
+        .btn-logout:hover {
+            border-color:var(--red);color:var(--red);
+        }
+
+        /* ── Layout ── */
+        .page-wrap {
+            max-width: 1240px; margin: 0 auto; padding: 28px 20px;
+        }
+
+        /* ── Stat strip ── */
+        .stat-strip {
+            display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
+        }
+        .stat-chip {
+            background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 18px; display: flex; align-items: center; gap: 10px;
+        }
+        .stat-chip .val {
+            font-size: 1.6rem; font-weight: 800; font-family: var(--mono); line-height: 1;
+        }
+        .stat-chip .lbl {
+            font-size: 0.72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px;
+        }
+
+        /* ── Toolbar ── */
+        .toolbar {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+        }
+        .search-box {
+            flex: 1; min-width: 180px; position: relative;
+        }
+        .search-box input {
+            width: 100%; background: var(--surface); border: 1px solid var(--border); color: #dde1f0; border-radius: 8px; padding: 7px 12px 7px 36px; font-size: 0.85rem; font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .search-box input:focus {
+            border-color: var(--accent);
+        }
+        .search-box .si {
+            position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; pointer-events: none;
+        }
+        .filter-select {
+            background: var(--surface); border: 1px solid var(--border); color: #dde1f0; border-radius: 8px; padding: 7px 12px; font-size: 0.83rem; font-family: var(--font); outline: none; cursor: pointer;
+        }
+        .filter-select:focus {
+            border-color: var(--accent);
+        }
+
+        /* ── Tag pills row ── */
+        .tag-row {
+            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; align-items: center;
+        }
+        .tag-pill {
+            padding: 3px 11px; border-radius: 20px; font-size: 0.76rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--muted); transition: all 0.15s; white-space: nowrap;
+        }
+        .tag-pill:hover {
+            border-color: var(--accent); color: var(--accent);
+        }
+        .tag-pill.active {
+            background: var(--accent); border-color: var(--accent); color: #fff;
+        }
+        .tag-pill.tag-important {
+            border-color: var(--red); color: var(--red);
+        }
+        .tag-pill.tag-important.active {
+            background: var(--red); color: #fff;
+        }
+        .tag-pill.tag-revise {
+            border-color: var(--orange); color: var(--orange);
+        }
+        .tag-pill.tag-revise.active {
+            background: var(--orange); color: #fff;
+        }
+        .tag-pill.tag-done {
+            border-color: var(--green); color: var(--green);
+        }
+        .tag-pill.tag-done.active {
+            background: var(--green); color: #0b0d15;
+        }
+
+        /* ── File Table ── */
+        .file-table {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+        }
+        .file-table-head {
+            display: grid; grid-template-columns: 28px 1fr 140px 90px 110px 130px; gap: 0; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--surface);
+        }
+        .th {
+            font-size: 0.71rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); display: flex; align-items: center; gap: 4px; cursor: pointer; user-select: none;
+        }
+        .th:hover {
+            color: #dde1f0;
+        }
+        .th.sorted {
+            color: var(--accent);
+        }
+        .file-row {
+            display: grid; grid-template-columns: 28px 1fr 140px 90px 110px 130px; gap: 0; padding: 10px 16px; border-bottom: 1px solid var(--border); transition: background 0.12s; align-items: center;
+        }
+        .file-row:last-child {
+            border-bottom: none;
+        }
+        .file-row:hover {
+            background: rgba(79,142,247,0.04);
+        }
+        .file-icon-cell {
+            width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0;
+        }
+        .fname {
+            font-size: 0.84rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 12px;
+        }
+        .fcourse {
+            font-size: 0.73rem; color: var(--muted); font-family: var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .fsize  {
+            font-size: 0.78rem; color: var(--muted); font-family: var(--mono);
+        }
+        .fdate  {
+            font-size: 0.75rem; color: var(--muted);
+        }
+        .ftags  {
+            display: flex; gap: 4px; flex-wrap: wrap;
+        }
+        .ftag   {
+            font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; font-weight: 600; cursor: pointer;
+        }
+        .factions {
+            display: flex; gap: 6px; align-items: center; justify-content: flex-end;
+        }
+
+        /* ── Sync badge ── */
+        .sync-badge {
+            font-size: 0.68rem; padding: 2px 8px; border-radius: 10px; font-weight: 700; white-space: nowrap;
+        }
+        .sync-new      {
+            background: rgba(79,142,247,0.15); color: var(--accent); border: 1px solid rgba(79,142,247,0.3);
+        }
+        .sync-updated  {
+            background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3);
+        }
+        .sync-resumed  {
+            background: rgba(167,139,250,0.15);color: var(--purple); border: 1px solid rgba(167,139,250,0.3);
+        }
+        .sync-current  {
+            background: rgba(45,212,191,0.12); color: var(--green);  border: 1px solid rgba(45,212,191,0.3);
+        }
+
+        /* ── Buttons ── */
+        .btn-xs {
+            display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted); transition: all 0.15s; font-family: var(--font); white-space: nowrap;
+        }
+        .btn-xs:hover {
+            border-color: var(--accent); color: var(--accent);
+        }
+        .btn-xs.danger:hover {
+            border-color: var(--red); color: var(--red);
+        }
+
+        /* ── Tag editor modal ── */
+        .tag-modal-bg {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 2000; display: none; align-items: center; justify-content: center;
+        }
+        .tag-modal-bg.open {
+            display: flex;
+        }
+        .tag-modal {
+            background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; min-width: 340px; max-width: 90vw;
+        }
+        .tag-modal h3 {
+            font-size: 1rem; font-weight: 700; margin-bottom: 16px;
+        }
+        .tag-input-row {
+            display: flex; gap: 8px; margin-bottom: 14px;
+        }
+        .tag-input {
+            flex: 1; background: var(--surface); border: 1px solid var(--border); color: #dde1f0; border-radius: 8px; padding: 7px 12px; font-size: 0.85rem; font-family: var(--font); outline: none;
+        }
+        .tag-input:focus {
+            border-color: var(--accent);
+        }
+        .btn-add-tag {
+            background: var(--accent); border: none; color: #fff; border-radius: 8px; padding: 7px 16px; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: var(--font);
+        }
+        .quick-tags {
+            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
+        }
+        .q-tag {
+            padding: 4px 12px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: #dde1f0; transition: all 0.15s;
+        }
+        .q-tag:hover {
+            border-color: var(--accent); color: var(--accent);
+        }
+        .current-tags {
+            display: flex; gap: 6px; flex-wrap: wrap; min-height: 28px;
+        }
+        .c-tag {
+            padding: 3px 10px; border-radius: 12px; font-size: 0.76rem; font-weight: 600; display: flex; align-items: center; gap: 5px;
+        }
+        .c-tag .rm {
+            cursor: pointer; opacity: 0.7;
+        }
+        .c-tag .rm:hover {
+            opacity: 1;
+        }
+
+        /* ── Misc ── */
+        .empty-msg {
+            padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.88rem;
+        }
+        .center-screen {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 14px; color: var(--muted);
+        }
+        .spinner-ring {
+            width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .toast-custom {
+            position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 18px;font-size:0.85rem;color:#dde1f0;max-width:320px;z-index:9999;opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;
+        }
+        .toast-custom.show {
+            opacity:1;transform:translateY(0);
+        }
+
+        /* colour helpers */
+        .c-blue   {
+            color: var(--accent);
+        }
+        .c-green  {
+            color: var(--green);
+        }
+        .c-red    {
+            color: var(--red);
+        }
+        .c-orange {
+            color: var(--orange);
+        }
+        .c-purple {
+            color: var(--purple);
+        }
+        .icon-pdf  {
+            background:rgba(231,76,60,0.15);  color:#e74c3c;
+        }
+        .icon-pptx {
+            background:rgba(230,126,34,0.15); color:#e67e22;
+        }
+        .icon-docx {
+            background:rgba(79,142,247,0.15); color:#4f8ef7;
+        }
+        .icon-zip  {
+            background:rgba(167,139,250,0.15);color:#a78bfa;
+        }
+        .icon-mp4  {
+            background:rgba(45,212,191,0.15); color:#2dd4bf;
+        }
+        .icon-xlsx {
+            background:rgba(45,212,191,0.15); color:#2dd4bf;
+        }
+        .icon-file {
+            background:rgba(90,96,128,0.2);   color:var(--muted);
+        }
+
+        @media (max-width: 900px) {
+            .file-table-head, .file-row {
+                grid-template-columns: 28px 1fr 90px 80px;
+            }
+            .col-date, .col-actions {
+                display: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .topnav .nav-links {
+                display: none;
+            }
+            .file-table-head, .file-row {
+                grid-template-columns: 28px 1fr 80px;
+            }
+            .col-course, .col-date, .col-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="topnav d-flex align-items-center px-4 gap-3">
+    <a class="nav-brand me-3" href="/dashboard.html">NUST <span>LMS</span></a>
+    <div class="d-flex gap-1 nav-links">
+        <a href="/dashboard.html"  class="nav-pill">🏠 Dashboard</a>
+        <a href="/calendar.html"   class="nav-pill">📅 Calendar</a>
+        <a href="/files.html"      class="nav-pill active">📂 Files</a>
+        <a href="/summarizer.html" class="nav-pill">🤖 Summarizer</a>
+    </div>
+    <div class="d-flex align-items-center gap-2 ms-auto">
+        <div class="user-avatar" id="avatarLetter">?</div>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<!-- Page -->
+<div class="page-wrap">
+
+    <!-- Stats -->
+    <div class="stat-strip" id="statStrip">
+        <div class="stat-chip"><div><div class="val c-blue" id="statFiles">—</div><div class="lbl">Files</div></div></div>
+        <div class="stat-chip"><div><div class="val c-green" id="statSize">—</div><div class="lbl">Total Size</div></div></div>
+        <div class="stat-chip"><div><div class="val c-purple" id="statCourses">—</div><div class="lbl">Courses</div></div></div>
+        <div class="stat-chip" style="margin-left:auto">
+            <button class="btn-xs" onclick="syncAll()" id="syncBtn">
+                <i class="bi bi-arrow-repeat"></i> Smart Sync All
+            </button>
+            <button class="btn-xs danger ms-2" onclick="confirmClear()">
+                <i class="bi bi-trash3"></i> Clear History
+            </button>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="search-box">
+            <i class="bi bi-search si"></i>
+            <input type="text" id="searchInput" placeholder="Search by file name or course..." oninput="debounceSearch()">
+        </div>
+        <select class="filter-select" id="courseFilter" onchange="applyFilters()">
+            <option value="">All Courses</option>
+        </select>
+        <select class="filter-select" id="sortSelect" onchange="applyFilters()">
+            <option value="newest">📅 Newest First</option>
+            <option value="oldest">📅 Oldest First</option>
+            <option value="largest">📦 Largest First</option>
+            <option value="smallest">📦 Smallest First</option>
+            <option value="course">🗂 By Course</option>
+            <option value="name">🔤 By Name</option>
+        </select>
+    </div>
+
+    <!-- Tag filter row -->
+    <div class="tag-row" id="tagRow">
+        <span style="font-size:0.76rem;color:var(--muted);font-weight:600">Tags:</span>
+        <div class="tag-pill active" onclick="setTagFilter('', this)">All</div>
+    </div>
+
+    <!-- File Table -->
+    <div class="file-table" id="fileTable">
+        <div class="file-table-head">
+            <div></div>
+            <div class="th" onclick="setSortAndRefresh('name')">File <i class="bi bi-arrow-down-up ms-1"></i></div>
+            <div class="th col-course" onclick="setSortAndRefresh('course')">Course <i class="bi bi-arrow-down-up ms-1"></i></div>
+            <div class="th" onclick="setSortAndRefresh('largest')">Size <i class="bi bi-arrow-down-up ms-1"></i></div>
+            <div class="th col-date" onclick="setSortAndRefresh('newest')">Downloaded <i class="bi bi-arrow-down-up ms-1"></i></div>
+            <div class="th col-actions">Tags / Actions</div>
+        </div>
+        <div id="fileRows">
+            <div class="center-screen" style="min-height:200px">
+                <div class="spinner-ring"></div>
+                <p style="font-size:0.85rem">Loading file manager...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tag Editor Modal -->
+<div class="tag-modal-bg" id="tagModalBg" onclick="closeTagModal(event)">
+    <div class="tag-modal" onclick="event.stopPropagation()">
+        <h3>🏷 Manage Tags</h3>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:12px" id="tagModalFile">—</p>
+        <div class="quick-tags">
+            <div class="q-tag" onclick="quickTag('⭐ important')">⭐ important</div>
+            <div class="q-tag" onclick="quickTag('📖 revise later')">📖 revise later</div>
+            <div class="q-tag" onclick="quickTag('✅ done')">✅ done</div>
+            <div class="q-tag" onclick="quickTag('📌 key material')">📌 key material</div>
+            <div class="q-tag" onclick="quickTag('❓ unclear')">❓ unclear</div>
+        </div>
+        <div class="tag-input-row">
+            <input class="tag-input" id="customTagInput" placeholder="Custom tag..." maxlength="30"
+                   onkeydown="if(event.key==='Enter') addCustomTag()">
+            <button class="btn-add-tag" onclick="addCustomTag()">Add</button>
+        </div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-bottom:8px">Current tags:</div>
+        <div class="current-tags" id="currentTagsDisplay"></div>
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn-xs" onclick="closeTagModal()">Done</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast-custom" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    // State
+    let allRecords = [];
+    let activeTag  = '';
+    let tagModal   = { fileName: '', courseName: '', tags: [] };
+    let _debounce  = null;
+
+    // Boot
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const r = await fetch('/api/auth/status');
+            const d = await r.json();
+            if (!d.loggedIn) {
+                window.location.href = '/index.html'; return;
+            }
+            const av = document.getElementById('avatarLetter');
+            if (av) av.textContent = '?';
+        } catch {
+            window.location.href = '/index.html'; return;
+        }
+
+        await Promise.all([loadStats(), loadRecords(), loadTags()]);
+    });
+
+    // Data loaders
+    async function loadStats() {
+        try {
+            const r = await fetch('/api/history/stats');
+            if (!r.ok) return;
+            const d = await r.json();
+            document.getElementById('statFiles').textContent   = d.totalFiles;
+            document.getElementById('statSize').textContent    = formatBytes(d.totalBytes);
+            document.getElementById('statCourses').textContent = d.uniqueCourses;
+        } catch {}
+    }
+
+    async function loadRecords() {
+        try {
+            const q      = document.getElementById('searchInput').value;
+            const course = document.getElementById('courseFilter').value;
+            const sort   = document.getElementById('sortSelect').value;
+
+            const params = new URLSearchParams({ q, course, tag: activeTag, sort });
+            const r = await fetch('/api/history/search?' + params);
+            if (!r.ok) {
+                renderEmpty('Failed to load file history.'); return;
+            }
+
+            allRecords = await r.json();
+            populateCourseFilter(allRecords);
+            renderRows(allRecords);
+
+        } catch (e) {
+            renderEmpty('Error: ' + e.message);
+        }
+    }
+
+    async function loadTags() {
+        try {
+            const r = await fetch('/api/history/tags');
+            if (!r.ok) return;
+            const tags = await r.json();
+            const row = document.getElementById('tagRow');
+
+            // Remove old dynamic pills (keep label + "All")
+            while (row.children.length > 2) row.removeChild(row.lastChild);
+
+            tags.forEach(tag => {
+                const cls = tagColorClass(tag);
+                const el  = document.createElement('div');
+                el.className = `tag-pill ${
+                    cls
+                }${
+                    activeTag === tag ? ' active' : ''
+                }`;
+                el.textContent = tag;
+                el.onclick = () => setTagFilter(tag, el);
+                row.appendChild(el);
+            });
+        } catch {}
+    }
+
+    // Render
+    function renderRows(records) {
+        const container = document.getElementById('fileRows');
+
+        if (!records || records.length === 0) {
+            container.innerHTML = '<div class="empty-msg">No files found. Download some courses first!</div>';
+            return;
+        }
+
+        container.innerHTML = records.map(r => {
+            const ext  = (r.fileName || '').split('.').pop().toLowerCase();
+            const icon = fileIcon(ext);
+            const size = formatBytes(r.fileSizeBytes);
+            const date = formatDate(r.downloadedAt);
+            const tags = (r.tags || []).map(t =>
+                `<span class="ftag ${
+                tagColorClass(t)
+            }" style="background:rgba(255,255,255,0.06)"
+                   onclick="openTagModal('${safe(r.fileName)}','${safe(r.courseName)}')">${
+                safe(t)
+            }</span>`
+            ).join('');
+
+            const hashBadge = r.fileHash
+                ? `<span title="MD5: ${
+                r.fileHash
+            }" style="font-size:0.65rem;color:var(--muted);font-family:var(--mono)">${
+                r.fileHash.substring(0, 8)
+            }</span>`
+                : '';
+
+            return `
+        <div class="file-row">
+            <div class="file-icon-cell ${
+                icon.cls
+            }">${
+                icon.emoji
+            }</div>
+            <div style="min-width:0;padding-right:8px">
+                <div class="fname" title="${
+                safe(r.fileName)
+            }">${
+                safe(r.fileName)
+            }</div>
+                <div style="display:flex;gap:6px;align-items:center;margin-top:2px">${
+                hashBadge
+            }</div>
+            </div>
+            <div class="fcourse col-course">${
+                safe(r.courseShortName || r.courseName)
+            }</div>
+            <div class="fsize">${
+                size
+            }</div>
+            <div class="fdate col-date">${
+                date
+            }</div>
+            <div class="factions col-actions">
+                <div class="ftags">${
+                tags
+            }</div>
+                <button class="btn-xs" onclick="openTagModal('${
+                safe(r.fileName)
+            }','${
+                safe(r.courseName)
+            }')">
+                    <i class="bi bi-tag"></i>
+                </button>
+            </div>
+        </div>`;
+        }).join('');
+    }
+
+    function populateCourseFilter(records) {
+        const sel = document.getElementById('courseFilter');
+        const existing = new Set(Array.from(sel.options).map(o => o.value));
+
+        const courses = [...new Set(records.map(r => r.courseShortName || r.courseName).filter(Boolean))].sort();
+        courses.forEach(c => {
+            if (!existing.has(c)) {
+                const opt = document.createElement('option');
+                opt.value = c;
+                opt.textContent = c;
+                sel.appendChild(opt);
+            }
+        });
+    }
+
+    function renderEmpty(msg) {
+        document.getElementById('fileRows').innerHTML = `<div class="empty-msg">${safe(msg)}</div>`;
+    }
+
+    // Filters & Sort
+    function debounceSearch() {
+        clearTimeout(_debounce);
+        _debounce = setTimeout(applyFilters, 280);
+    }
+
+    async function applyFilters() {
+        await loadRecords();
+    }
+
+    function setSortAndRefresh(sortVal) {
+        document.getElementById('sortSelect').value = sortVal;
+        applyFilters();
+    }
+
+    function setTagFilter(tag, el) {
+        activeTag = tag;
+        document.querySelectorAll('.tag-row .tag-pill').forEach(p => p.classList.remove('active'));
+        if (el) el.classList.add('active');
+        applyFilters();
+    }
+
+    // Smart Sync All
+    async function syncAll() {
+        const btn = document.getElementById('syncBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-sm me-1" style="width:12px;height:12px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block"></span> Syncing...';
+
+        try {
+            const r = await fetch('/api/dashboard/summary');
+            if (!r.ok) { showToast('Failed to load courses.', true); return; }
+            const data = await r.json();
+
+            let totalDl = 0, totalUp = 0, totalRe = 0, totalSk = 0;
+
+            for (const course of data.courses) {
+                try {
+                    const dr = await fetch(`/api/download/${
+                        course.id
+                    }`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            shortName: course.shortName
+                        })
+                    });
+                    if (dr.ok) {
+                        const dd = await dr.json();
+                        totalDl += dd.downloaded || 0;
+                        totalUp += dd.updated    || 0;
+                        totalRe += dd.resumed    || 0;
+                        totalSk += dd.skipped    || 0;
+                    }
+                } catch {}
+            }
+
+            showToast(`Sync complete: ${
+                totalDl
+            } new, ${
+                totalUp
+            } updated, ${
+                totalRe
+            } resumed, ${
+                totalSk
+            } unchanged.`);
+            await Promise.all([loadStats(), loadRecords(), loadTags()]);
+
+        } catch (e) {
+            showToast('Sync error: ' + e.message, true);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="bi bi-arrow-repeat"></i> Smart Sync All';
+        }
+    }
+
+    // Tag Modal
+    function openTagModal(fileName, courseName) {
+        const rec = allRecords.find(r => r.fileName === fileName && r.courseName === courseName);
+
+        tagModal.fileName   = fileName;
+        tagModal.courseName = courseName;
+        tagModal.tags       = rec ? [...(rec.tags || [])] : [];
+
+        document.getElementById('tagModalFile').textContent = fileName + ' — ' + courseName;
+        document.getElementById('customTagInput').value = '';
+        renderCurrentTags();
+        document.getElementById('tagModalBg').classList.add('open');
+    }
+
+    function closeTagModal(e) {
+        if (e && e.target !== document.getElementById('tagModalBg')) return;
+        document.getElementById('tagModalBg').classList.remove('open');
+        loadRecords();
+        loadTags();
+    }
+
+    function renderCurrentTags() {
+        const el = document.getElementById('currentTagsDisplay');
+        if (!tagModal.tags.length) {
+            el.innerHTML = '<span style="font-size:0.78rem;color:var(--muted)">No tags yet</span>';
+            return;
+        }
+        el.innerHTML = tagModal.tags.map(t =>
+            `<span class="c-tag" style="background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.25);color:#dde1f0">
+                ${
+            safe(t)
+        }
+                <span class="rm" onclick="doRemoveTag('${
+            safe(t)
+        }')">✕</span>
+             </span>`
+        ).join('');
+    }
+
+    async function quickTag(tag) {
+        await doAddTag(tag);
+    }
+
+    async function addCustomTag() {
+        const val = document.getElementById('customTagInput').value.trim();
+        if (!val) return;
+        await doAddTag(val);
+        document.getElementById('customTagInput').value = '';
+    }
+
+    async function doAddTag(tag) {
+        if (tagModal.tags.includes(tag)) return;
+        try {
+            const r = await fetch('/api/history/tag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fileName: tagModal.fileName, courseName: tagModal.courseName, tag
+                })
+            });
+            if (r.ok) {
+                tagModal.tags.push(tag);
+                renderCurrentTags();
+                const rec = allRecords.find(r => r.fileName === tagModal.fileName && r.courseName === tagModal.courseName);
+                if (rec) {
+                    if (!rec.tags) rec.tags = [];
+                    rec.tags.push(tag);
+                    renderRows(allRecords);
+                }
+            } else {
+                const d = await r.json();
+                showToast(d.error || 'Failed to add tag.', true);
+            }
+        } catch (e) {
+            showToast(e.message, true);
+        }
+    }
+
+    async function doRemoveTag(tag) {
+        try {
+            const r = await fetch('/api/history/tag', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fileName: tagModal.fileName, courseName: tagModal.courseName, tag
+                })
+            });
+            if (r.ok) {
+                tagModal.tags = tagModal.tags.filter(t => t !== tag);
+                renderCurrentTags();
+                const rec = allRecords.find(r => r.fileName === tagModal.fileName && r.courseName === tagModal.courseName);
+                if (rec && rec.tags) {
+                    rec.tags = rec.tags.filter(t => t !== tag);
+                    renderRows(allRecords);
+                }
+            }
+        } catch (e) {
+            showToast(e.message, true);
+        }
+    }
+
+    // Clear History
+    async function confirmClear() {
+        if (!confirm('Clear all download history? This does NOT delete the actual files — only the history records.')) return;
+        try {
+            const r = await fetch('/api/history', {
+                method: 'DELETE'
+            });
+            if (r.ok) {
+                showToast('History cleared.');
+                allRecords = [];
+                renderRows([]);
+                loadStats();
+            }
+        } catch (e) {
+            showToast(e.message, true);
+        }
+    }
+
+    // Utilities
+    function fileIcon(ext) {
+        const m = {
+            pdf:'icon-pdf', pptx:'icon-pptx', ppt:'icon-pptx', docx:'icon-docx', doc:'icon-docx',
+            zip:'icon-zip', rar:'icon-zip', mp4:'icon-mp4', xlsx:'icon-xlsx', xls:'icon-xlsx'
+        };
+        const e = {
+            pdf:'📄', pptx:'📊', ppt:'📊', docx:'📝', doc:'📝',
+            zip:'🗜', rar:'🗜', mp4:'🎬', xlsx:'📈', xls:'📈'
+        };
+        return { cls: m[ext] || 'icon-file', emoji: e[ext] || '📎' };
+    }
+
+    function tagColorClass(tag) {
+        if (!tag) return '';
+        const l = tag.toLowerCase();
+        if (l.includes('important') || l.includes('⭐')) return 'tag-important';
+        if (l.includes('revise')    || l.includes('📖')) return 'tag-revise';
+        if (l.includes('done')      || l.includes('✅')) return 'tag-done';
+        return '';
+    }
+
+    function formatBytes(b) {
+        if (!b || b === 0) return '—';
+        if (b < 1024)           return b + ' B';
+        if (b < 1024*1024)      return (b/1024).toFixed(1) + ' KB';
+        if (b < 1024*1024*1024) return (b/(1024*1024)).toFixed(1) + ' MB';
+        return (b/(1024*1024*1024)).toFixed(1) + ' GB';
+    }
+
+    function formatDate(iso) {
+        if (!iso) return '—';
+        try {
+            const d = new Date(iso);
+            return d.toLocaleDateString('en-PK', {
+                day:'numeric', month:'short', year:'numeric'
+            });
+        } catch {
+            return iso.substring(0, 10);
+        }
+    }
+
+    function safe(s) {
+        if (!s) return '';
+        return String(s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    let _toast;
+    function showToast(msg, isErr = false) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.style.borderColor = isErr ? 'var(--red)' : 'var(--border)';
+        el.classList.add('show');
+        clearTimeout(_toast);
+        _toast = setTimeout(() => el.classList.remove('show'), 3800);
+    }
+
+    async function logout() {
+        await fetch('/api/auth/logout', {
+            method: 'POST'
+        });
+        window.location.href = '/index.html';
+    }
+</script>
+</body>
+</html>
